@@ -1,9 +1,7 @@
 Om te beginnen met het developpen van onze software moet er eerst een omgeving worden opgezet.
 
 
-############
-# Windows: #
-############
+# Windows: 
 
 Download en installeer AVRStudio4:
 http://www.atmel.com/Images/AvrStudio4Setup.exe
