@@ -1,0 +1,72 @@
+#include <avr/io.h>
+#include <avr/interrupt.h>
+
+#define ADRESPORTA 0x1B
+#define ADRESPORTB 0x18
+#define ADRESPORTC 0x15
+#define ADRESPORTD 0x12
+
+class AutoLicht
+{
+	public: 
+		AutoLicht(uint8_t rood, uint8_t oranje, uint8_t groen, uint8_t poort);
+		void LichtNaarRood();
+		void LichtNaarOranje();
+		void LichtNaarGroen();
+		void AlleLichtenUit();	
+		
+	private:
+		uint8_t rood;
+		uint8_t oranje;
+		uint8_t groen;
+		uint8_t poort;
+};
+
+AutoLicht::AutoLicht(uint8_t rood, uint8_t oranje, uint8_t groen, uint8_t poort):rood(rood), oranje(oranje), groen(groen), poort(poort) {	
+}
+
+void AutoLicht::LichtNaarRood() {
+	AlleLichtenUit();
+	uint8_t temp = rood;
+	_SFR_IO8(poort) &= temp; 
+}
+
+void AutoLicht::LichtNaarOranje() {
+	AlleLichtenUit();
+	uint8_t temp = oranje;
+	_SFR_IO8(poort) &= temp; 
+}
+
+void AutoLicht::LichtNaarGroen() {
+	AlleLichtenUit();
+	uint8_t temp = groen;
+	_SFR_IO8(poort) &= temp; 
+}
+
+void AutoLicht::AlleLichtenUit() {
+	uint8_t temp = 0xFF;
+	_SFR_IO8(poort) |= temp;
+
+}
+
+int main()
+{
+	DDRA=0xFF;
+	DDRB=0xFF;
+	DDRC=0xFF;
+	PORTA=0xFF;
+	PORTB=0xFF;
+	PORTC=0xFF;
+
+
+	AutoLicht azl(0xFE, 0xFD, 0xFB, ADRESPORTB);
+	AutoLicht azr(0xDF, 0xEF, 0xF7, ADRESPORTB);
+	AutoLicht ahl(0xFE, 0xFD, 0xFB, ADRESPORTC);
+	AutoLicht ahr(0xF7, 0xEF, 0xDF, ADRESPORTC);
+
+	while(1) {
+		PINE = PINE;
+	}
+
+
+}
