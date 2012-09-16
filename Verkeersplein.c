@@ -37,6 +37,17 @@ int main()
 	ahl.lichtNaarOranje();
 	ahl.alleLichtenUit();
 
+	//Rien test ;)
+	//eerste lijst met lichten
+	List<VoetgangerLicht> l1;
+	l1.push_back(azl);
+	if(l1.komtAlVoor(azr))
+		ahl.lichtNaarRood();
+	l1.push_back(azr);
+	if(l1.komtAlVoor(azr))
+		ahl.lichtNaarGroen();
+
+
 	List<int> a;
 
 	while(1) {

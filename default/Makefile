@@ -37,7 +37,7 @@ HEX_EEPROM_FLAGS += --change-section-lma .eeprom=0 --no-change-warnings
 
 
 ## Objects that must be built in order to link
-OBJECTS = Verkeersplein.o voetgangerlicht.o autolicht.o list.o 
+OBJECTS = Verkeersplein.o voetgangerlicht.o autolicht.o list.o scenario.o 
 
 ## Objects explicitly added by the user
 LINKONLYOBJECTS = 
@@ -54,6 +54,9 @@ autolicht.o: ../autolicht.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
 
 list.o: ../list.c
+	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
+
+scenario.o: ../scenario.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
 
 ##Link
