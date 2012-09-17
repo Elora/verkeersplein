@@ -2,9 +2,8 @@
 #include <stdlib.h>
 //loze comment
 template <typename T> List<T>::List(){
-    kop = NULL;
-    staart = NULL;
-	grootte = 0;
+    kop = 0;
+    staart = 0;
 }
 
 template<typename T> void List<T>::push_front(T in){
@@ -24,7 +23,6 @@ template<typename T> void List<T>::push_front(T in){
             kop->data = in;
         }
     }
-	grootte++;
 }
 
 template <typename T> void List<T>::push_back(T in){
@@ -44,21 +42,19 @@ template <typename T> void List<T>::push_back(T in){
             staart->data = in;
         }
     }
-	grootte++;
 }
 
 template <typename T> void List<T>::pop_front(){
-	if (kop != 0) //Verwijderd de eerste waarde uit de lijst zolang de lijst niet leeg is
+if (kop != 0) //Verwijderd de eerste waarde uit de lijst zolang de lijst niet leeg is
     {
         hulp = kop;
         kop = hulp->next;
         free(hulp);
-		grootte--;
     }
 }
 
 template <typename T> void List<T>::pop_back(){
-	if (kop != 0) //Verwijderd de laatse waarde uit de lijst zolang de lijst niet leeg is
+if (kop != 0) //Verwijderd de laatse waarde uit de lijst zolang de lijst niet leeg is
     {
         for (hulp = kop; hulp->next!=staart; hulp=hulp->next){};
         free(hulp->next);
@@ -85,6 +81,7 @@ template <typename T> T List<T>::geefKop(){
 }
 
 template <typename T> T List<T>::geefPositie(int positie){
+    if (positie < 0) positie = 0;
     hulp=kop; //Als de lijst leeg is wordt 0 teruggegeven;
     if (hulp == 0)
             return 0;
@@ -92,11 +89,9 @@ template <typename T> T List<T>::geefPositie(int positie){
     for(int i = 1; i < positie; i++)
     {
         hulp = hulp->next;
+        if (hulp == 0)
+            return 0;
     }
 
     return hulp->data;
-}
-
-template <typename T> int List<T>::krijgGrootte() {
-	return grootte;
 }
