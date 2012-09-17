@@ -7,9 +7,10 @@
 
 class Scenario {
 	public:
-		Scenario(List<VoetgangerLicht*>* l);
+		Scenario(List<VoetgangerLicht*> *l);
+		void speelAf();
 	private:
-		List<VoetgangerLicht*>* list;
+		List<VoetgangerLicht*> *list;
 };
 
 #endif

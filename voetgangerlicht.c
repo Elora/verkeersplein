@@ -22,22 +22,24 @@ void VoetgangerLicht::alleLichtenUit() {
 
 //Hier overloaden wij de 'is gelijk aan' operator om dezelfde lichten
 // te detecteren
-bool VoetgangerLicht::operator==(VoetgangerLicht &rhs){
-	if((*this).getRood() == rhs.getRood() &&
-	   (*this).getGroen() == rhs.getGroen() &&
-	   (*this).getPoort() == rhs.getPoort())
+bool VoetgangerLicht::operator ==(VoetgangerLicht &rhs){
+	if((*this).krijgRood() == rhs.krijgRood() &&
+	   (*this).krijgGroen() == rhs.krijgGroen() &&
+	   (*this).krijgPoort() == rhs.krijgPoort())
 		return true;
 	return false;
 }
 
-uint8_t VoetgangerLicht::getRood() const {
+
+//Getters en Setters
+uint8_t VoetgangerLicht::krijgRood() const {
 	return rood;
 }
 
-uint8_t VoetgangerLicht::getGroen() const {
+uint8_t VoetgangerLicht::krijgGroen() const {
 	return groen;
 }
 
-uint8_t VoetgangerLicht::getPoort() const {
+uint8_t VoetgangerLicht::krijgPoort() const {
 	return poort;
 }
