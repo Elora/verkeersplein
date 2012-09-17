@@ -43,16 +43,12 @@ int main()
 
 	//Rien test ;)
 	//eerste lijst met lichten
-	List<VoetgangerLicht*> l1;
-	l1.push_back(ahl);
-	if(l1.komtAlVoor(ahl))
-		ahl->lichtNaarRood();
-	l1.push_back(ahl);
- 	if(l1.komtAlVoor(ahl))
-		ahl->lichtNaarGroen();
+	List<VoetgangerLicht*> *l1 = new List<VoetgangerLicht*>();
+	l1->push_back(ahl);
+	l1->push_back(azr);
 	
-	Scenario s1 = Scenario(&l1);
-	s1.speelAf();
+	Scenario *s1 = new Scenario(l1);
+	s1->speelAf();
 
 	List<int> a;
 

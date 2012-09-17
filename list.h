@@ -10,8 +10,8 @@ public:
     void pop_front();
     void pop_back();
     bool komtAlVoor(T);
-    T geefKop();
-    T krijgPositie(int);
+    T krijgKop();
+    T geefPositie(int);
 	int krijgGrootte();
 
 private:

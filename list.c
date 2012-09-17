@@ -73,13 +73,15 @@ template <typename T> bool List<T>::komtAlVoor(T in){
     return false;
 }
 
-template <typename T> T List<T>::geefKop(){
+template <typename T> T List<T>::krijgKop(){
     if (kop != 0)
         return kop->data;
     else
         return 0;
 }
 
+
+//geef positie begint met tellen bij het getal 1
 template <typename T> T List<T>::geefPositie(int positie){
     if (positie < 0) positie = 0;
     hulp=kop; //Als de lijst leeg is wordt 0 teruggegeven;
