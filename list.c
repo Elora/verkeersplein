@@ -1,3 +1,6 @@
+#ifndef LISTC
+#define LISTC
+
 #include "list.h"
 #include <stdlib.h>
 //loze comment
@@ -94,3 +97,5 @@ template <typename T> T List<T>::geefPositie(int positie){
 
     return hulp->data;
 }
+
+#endif

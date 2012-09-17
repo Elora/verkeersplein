@@ -3,6 +3,7 @@
 #include "voetgangerlicht.h"
 #include "autolicht.h"
 #include "list.c"
+#include "verkeersregelaar.h"
 
 // Definieer de adressen van PORTA t/m PORTD
 #define ADRESPORTA 0x1B
@@ -31,29 +32,20 @@ int main()
 	VoetgangerLicht vz(0xBF, 0x7F, ADRESPORTB);
 	VoetgangerLicht vhl(0xBF, 0x7F, ADRESPORTC);
 
-	//test
-	ahl.lichtNaarGroen(); 
-	ahl.lichtNaarRood();
-	ahl.lichtNaarOranje();
-	ahl.alleLichtenUit();
+	List<AutoLicht*> a;
+	List<VoetgangerLicht*> v;
 
-	//Rien test ;)
-	//eerste lijst met lichten
-	List<VoetgangerLicht> l1;
-	l1.push_back(azl);
-	if(l1.komtAlVoor(azr))
-		ahl.lichtNaarRood();
-	l1.push_back(azr);
-	if(l1.komtAlVoor(azr))
-		ahl.lichtNaarGroen();
-
-
-	List<int> a;
-
+	a.push_back(&azl);
+	a.push_back(&azr);
+	a.push_back(&ahl);
+	a.push_back(&ahr);
+	v.push_back(&vhr);
+	v.push_back(&vz);
+	v.push_back(&vhl);
+	
+	VerkeersRegelaar(&a, &v);
+	
 	while(1) {
 		PINE = PINE;
 	}
-
-
-
 }
