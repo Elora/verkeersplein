@@ -11,7 +11,8 @@ public:
     void pop_back();
     bool komtAlVoor(T);
     T geefKop();
-    T geefPositie(int);
+    T krijgPositie(int);
+	int krijgGrootte();
 
 private:
     struct lijst{
@@ -21,6 +22,7 @@ private:
     struct lijst* kop;
     struct lijst* staart;
     struct lijst* hulp;
+	int grootte;
 };
 
 #endif

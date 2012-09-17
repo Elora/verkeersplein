@@ -10,10 +10,14 @@ class VoetgangerLicht
 		void lichtNaarRood();
 		void lichtNaarGroen();
 		virtual void alleLichtenUit();
-		bool operator==(VoetgangerLicht &rhs);
-		uint8_t getRood() const;
-		uint8_t getGroen() const;
-		uint8_t getPoort() const;
+
+		//operator overload
+		bool operator ==(VoetgangerLicht &rhs);
+
+		//getters en setters
+		uint8_t krijgRood() const;
+		uint8_t krijgGroen() const;
+		uint8_t krijgPoort() const;
 	
 	protected:
 		uint8_t poort;
