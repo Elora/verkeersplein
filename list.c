@@ -1,6 +1,6 @@
 #include "list.h"
 #include <stdlib.h>
-
+//loze comment
 template <typename T> List<T>::List(){
     kop = NULL;
     staart = NULL;
@@ -84,8 +84,7 @@ template <typename T> T List<T>::geefKop(){
         return 0;
 }
 
-
-template <typename T> T List<T>::krijgPositie(int positie){
+template <typename T> T List<T>::geefPositie(int positie){
     hulp=kop; //Als de lijst leeg is wordt 0 teruggegeven;
     if (hulp == 0)
             return 0;
