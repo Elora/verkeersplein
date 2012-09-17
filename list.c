@@ -43,6 +43,7 @@ template <typename T> void List<T>::push_back(T in){
             staart->next = hulp;
             staart = hulp;
             staart->data = in;
+			staart->next = 0;
         }
     }
 }
@@ -67,10 +68,9 @@ if (kop != 0) //Verwijderd de laatse waarde uit de lijst zolang de lijst niet le
 
 template <typename T> bool List<T>::komtAlVoor(T in){
 // Kijkt of de waarde al in de lijst voorkomt
-//FIXME veroorzaakt infinite loop!
     for (hulp = kop; hulp != 0; hulp = hulp->next)
     {
-        if (hulp->data == in)
+        if (*hulp->data == *in)
             return true;
     }
     return false;
