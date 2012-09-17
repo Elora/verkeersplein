@@ -1,6 +1,6 @@
 #include "list.h"
 #include <stdlib.h>
-
+//loze comment
 template <typename T> List<T>::List(){
     kop = NULL;
     staart = NULL;
