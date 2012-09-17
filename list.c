@@ -2,8 +2,8 @@
 #include <stdlib.h>
 //loze comment
 template <typename T> List<T>::List(){
-    kop = NULL;
-    staart = NULL;
+    kop = 0;
+    staart = 0;
 }
 
 template<typename T> void List<T>::push_front(T in){
@@ -80,6 +80,7 @@ template <typename T> T List<T>::geefKop(){
 }
 
 template <typename T> T List<T>::geefPositie(int positie){
+    if (positie < 0) positie = 0;
     hulp=kop; //Als de lijst leeg is wordt 0 teruggegeven;
     if (hulp == 0)
             return 0;
@@ -87,6 +88,8 @@ template <typename T> T List<T>::geefPositie(int positie){
     for(int i = 1; i < positie; i++)
     {
         hulp = hulp->next;
+        if (hulp == 0)
+            return 0;
     }
 
     return hulp->data;
