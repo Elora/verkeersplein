@@ -1,16 +1,22 @@
 #ifndef SCENARIO_H
 #define SCENARIO_H
 
-//template <typename T> class List;
 #include "list.h"
-#include "voetgangerlicht.h"
+
+class AutoLicht;
+class VoetgangerLicht;
 
 class Scenario {
 	public:
-		Scenario(List<VoetgangerLicht*> *l);
-		void speelAf();
+		Scenario(List<VoetgangerLicht*> *v, List<AutoLicht*> *a);
+		void zetAllesNaarGroen();
+		void zetAllesNaarRood();
+		void voegAutoLichtToe(AutoLicht *a);
+		void voegVoetgangerLichtToe(VoetgangerLicht *v);
+		
 	private:
-		List<VoetgangerLicht*> *list;
+		List<VoetgangerLicht*> *voetgangerlichten;
+		List<AutoLicht*> *autolichten;
 };
 
 #endif

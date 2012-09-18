@@ -12,10 +12,6 @@
 #define ADRESPORTC 0x15
 #define ADRESPORTD 0x12
 
-
-void * operator new (size_t size);
-void operator delete(void* ptr);
-
 int main()
 {
 	//Stel onderstaande poorten in op Output en laad allemaal enen in
@@ -48,26 +44,15 @@ int main()
 	v.push_back(&vz);
 	v.push_back(&vhl);
 	
-//	VerkeersRegelaar(&a, &v);
+	List<VoetgangerLicht*> l1;
+	l1.push_back(&ahl);
+	l1.push_back(&azr);
 	
-	//Rien test ;)
-	//eerste lijst met lichten
-	List<VoetgangerLicht*> *l1 = new List<VoetgangerLicht*>();
-	l1->push_back(&ahl);
-	l1->push_back(&azr);
-	
-	Scenario *s1 = new Scenario(l1);
-	s1->speelAf();
+	Scenario s1(&v, &a);
+	s1.zetAllesNaarGroen();
+	s1.zetAllesNaarRood();
 
 	while(1) {
 		PINE = PINE;
 	}
-}
-
-void* operator new(size_t size) {
-	return malloc(size);
-}
-
-void operator delete(void * ptr) { 
-  free(ptr); 
 }
