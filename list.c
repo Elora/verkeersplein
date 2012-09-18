@@ -3,7 +3,7 @@
 
 #include "list.h"
 #include <stdlib.h>
-//Dit is de volgende loze comment
+//Dit is de volgende loze comment2
 template <typename T> List<T>::List(){
     kop = 0;
     staart = 0;
