@@ -70,7 +70,7 @@ template <typename T> bool List<T>::komtAlVoor(T in){
 // Kijkt of de waarde al in de lijst voorkomt
     for (hulp = kop; hulp != 0; hulp = hulp->next)
     {
-        if (*hulp->data == *in)
+        if (hulp->data == in)
             return true;
     }
     return false;
