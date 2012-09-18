@@ -2,7 +2,6 @@
 #define SCENARIO_H
 
 #include "list.h"
-
 class AutoLicht;
 class VoetgangerLicht;
 
