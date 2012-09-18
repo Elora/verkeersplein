@@ -12,25 +12,25 @@ void VerkeersRegelaar::doeNachtStand(){
 		voetgangerlichten->geefPositie(i)->alleLichtenUit();
 	}
 
-	int i;
+	int t = 0;
 
-	while(i < 10)
+	while(t < 10)
 	{
-		for (int b = 1; autolichten->geefPositie(b) != 0; i++)
+		for (int b = 1; autolichten->geefPositie(b) != 0; b++)
 		{
 			autolichten->geefPositie(b)->alleLichtenUit();
 		}
 
-		_delay_ms(1000);
+		//_delay_ms(5000);
 
-		for (int c = 1; autolichten->geefPositie(c) != 0; i++)
+		for (int c = 1; autolichten->geefPositie(c) != 0; c++)
 		{
 			autolichten->geefPositie(c)->lichtNaarOranje();
 		}
 
-		_delay_ms(1000);
+		//_delay_ms(5000);
 
-		i++;
+		t++;
 	}
 }
 
