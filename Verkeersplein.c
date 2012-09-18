@@ -44,10 +44,6 @@ int main()
 	v.push_back(&vz);
 	v.push_back(&vhl);
 	
-	List<VoetgangerLicht*> l1;
-	l1.push_back(&ahl);
-	l1.push_back(&azr);
-	
 	Scenario s1(&v, &a);
 	s1.zetAllesNaarGroen();
 	s1.zetAllesNaarRood();
