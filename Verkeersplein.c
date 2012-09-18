@@ -52,6 +52,9 @@ int main()
 	s1.zetAllesNaarGroen();
 	s1.zetAllesNaarRood();
 
+	VerkeersRegelaar vr(&a, &v);
+	vr.doeNachtStand();
+
 	while(1) {
 		PINE = PINE;
 	}

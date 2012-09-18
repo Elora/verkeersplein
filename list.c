@@ -63,6 +63,7 @@ if (kop != 0) //Verwijderd de laatse waarde uit de lijst zolang de lijst niet le
         for (hulp = kop; hulp->next!=staart; hulp=hulp->next){};
         free(hulp->next);
         staart = hulp;
+		staart->next = 0;
     }
 }
 
