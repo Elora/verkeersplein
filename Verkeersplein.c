@@ -35,6 +35,7 @@ int main()
 
 	List<AutoLicht*> a;
 	List<VoetgangerLicht*> v;
+	List<Scenario*> s;
 
 	a.push_back(&azl);
 	a.push_back(&azr);
@@ -45,11 +46,10 @@ int main()
 	v.push_back(&vhl);
 	
 	Scenario s1(&v, &a);
-	s1.zetAllesNaarGroen();
-	s1.zetAllesNaarRood();
+	s.push_back(&s1);
 
-	VerkeersRegelaar vr(&a, &v);
-	vr.doeNachtStand();
+	VerkeersRegelaar vr(&a, &v, &s);
+	vr.doeStandaardSequentie();
 
 	while(1) {
 		PINE = PINE;
