@@ -2,6 +2,7 @@
 #include "list.c"
 #include "voetgangerlicht.h"
 #include "autolicht.h"
+#include "avr/delay.h"
 
 
 //constructor
@@ -32,23 +33,46 @@ void Scenario::zetAllesNaarGroen() {
 	}
 }
 
-//Zet alle lichten in de lijsten op rood
-//Verder ziet de code er het zelfde uit als bij zetAllesNaarGroen
 void Scenario::zetAllesNaarRood() {
-	VoetgangerLicht* vObj = voetgangerlichten->krijgKop();
-	AutoLicht* aObj = autolichten->krijgKop();
-	uint8_t i = 1;
-	while(vObj != 0) {
-		vObj->lichtNaarRood();
-		i++;
-		vObj = voetgangerlichten->geefPositie(i);
+	//"Zet van alle autolichten uit scenario .. het licht op oranje"
+	for (int c = 1; autolichten->geefPositie(c) != 0; c++)
+		{
+			autolichten->geefPositie(c)->lichtNaarOranje();
+		}
+
+	
+	for(int k=0; k <6; k++) 
+	{    // Een loopje die de voetgangerlichten 3 keer laat knipperen
+	
+		if(k%2 == 0){ // Dus bij i = 0, i = 2, i = 4
+		//"Roep in een loopje van alle Voetgangerlichten uit scenario .. de alleLichtenUit() functie aan"
+			for (int l = 1; voetgangerlichten->geefPositie(l) != 0; l++)
+			{
+				voetgangerlichten->geefPositie(l)->alleLichtenUit();
+			}
+		}
+		else 
+		{
+		//"Roep in een loopje van alle Voetgangerlichten uit scenario .. de lichtNaarGroen() aan"
+			for (int l = 1; voetgangerlichten->geefPositie(l) != 0; l++)
+			{
+				voetgangerlichten->geefPositie(l)->lichtNaarGroen();
+			}
+		}
+		_delay_ms(4000);
+	
 	}
-	i = 1;
-	while(aObj != 0) {
-		aObj->lichtNaarRood();
-		i++;
-		aObj = autolichten->geefPositie(i);
+	
+	//"Zet van alle stoplichten uit scenario .. het licht op rood"
+	for (int i = 1; voetgangerlichten->geefPositie(i) != 0; i++)
+	{
+		voetgangerlichten->geefPositie(i)->lichtNaarRood();
 	}
+	for (int i = 1; autolichten->geefPositie(i) != 0; i++)
+	{
+		autolichten->geefPositie(i)->lichtNaarRood();
+	}
+	
 }
 
 //Voeg een nieuw licht toe aan de lijst met auto lichten

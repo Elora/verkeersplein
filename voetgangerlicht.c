@@ -1,6 +1,7 @@
 #include "voetgangerlicht.h"
 
-VoetgangerLicht::VoetgangerLicht(uint8_t rood, uint8_t groen, uint8_t poort):rood(rood), groen(groen), poort(poort) {	
+VoetgangerLicht::VoetgangerLicht(uint8_t rood, uint8_t groen, uint8_t poort):rood(rood), groen(groen), poort(poort) {
+lichtNaarRood();	
 }
 
 void VoetgangerLicht::lichtNaarRood() {

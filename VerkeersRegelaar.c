@@ -23,7 +23,7 @@ void VerkeersRegelaar::doeNachtStand(){ //Deze functie voert de nachtstand uit
 			temp->alleLichtenUit();
 		}
 
-		_delay_ms(1000); //Seconde lang uit
+		_delay_ms(10000); //Seconde lang uit
 
 		for (int c = 1; autolichten->geefPositie(c) != 0; c++) //Alle autolichten naar oranje
 		{
@@ -32,7 +32,7 @@ void VerkeersRegelaar::doeNachtStand(){ //Deze functie voert de nachtstand uit
 			temp->lichtNaarOranje();
 		}
 
-		_delay_ms(1000); //Seconde lang aan
+		_delay_ms(10000); //Seconde lang aan
 
 		t++;
 	}
@@ -42,9 +42,11 @@ void VerkeersRegelaar::doeStandaardSequentie() { //Deze functie voert de standaa
 	for (int i = 1; scenariolijst->geefPositie(i) != 0; i++) { //Doorloop alle scenario's omstebeurt
 		Scenario* scenario = scenariolijst->geefPositie(i);
 		scenario->zetAllesNaarGroen(); 	//In het scenario alles naar groen zetten
-		//_delay_ms(10000);				//Een bepaalde tijd wachten
+		for(int n = 0; n < 20; n++)
+			_delay_ms(5000);				//Een bepaalde tijd wachten
 		scenario->zetAllesNaarRood();	//En alles weer naar rood laten gaan
-		//_delay_ms(5000);				//En 5 sec wachten voordat het volgende scenario op groen gaat
+		for(int n = 0; n < 10; n++)
+			_delay_ms(5000);			//En 5 sec wachten voordat het volgende scenario op groen gaat
 
 		int j = i + 1;	
 		if(scenariolijst->geefPositie(j) == 0)	//Checken of de volgende positie in scenariolijst een scenario bevat
@@ -57,7 +59,7 @@ void VerkeersRegelaar::doeWachtrij(){
 }
 
 void VerkeersRegelaar::kiesFunctie(){
-
+doeNachtStand();
 }
 
 void VerkeersRegelaar::voegAutoLichtToe(AutoLicht* a){ //Voeg een autolicht toe aan de lijst autolichten

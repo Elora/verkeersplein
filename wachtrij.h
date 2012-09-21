@@ -10,7 +10,7 @@ public:
     Wachtrij();
     void voegToe(Scenario*);
 	bool doorzoekWachtrij(Scenario*);
-	void haalUitWachtrij(Scenario*);
+	void haalEersteUitWachtrij();
 	Scenario* geefEersteInWachtrij(Scenario*);
 
 private:

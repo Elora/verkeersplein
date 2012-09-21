@@ -13,8 +13,8 @@ bool Wachtrij::doorzoekWachtrij(Scenario *s){
 return rij.komtAlVoor(s);
 }
 
-void Wachtrij::haalUitWachtrij(Scenario *s){
-
+void Wachtrij::haalEersteUitWachtrij(){
+rij.pop_front();
 }
 
 Scenario* Wachtrij::geefEersteInWachtrij(Scenario *s){
