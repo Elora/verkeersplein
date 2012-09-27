@@ -5,12 +5,23 @@
 #include "list.c"
 #include "verkeersregelaar.h"
 #include "scenario.h"
+#include "sensor.h"
 
 // Definieer de adressen van PORTA t/m PORTD
 #define ADRESPORTA 0x1B
 #define ADRESPORTB 0x18
 #define ADRESPORTC 0x15
 #define ADRESPORTD 0x12
+
+//Sensoren definieren
+Sensor svz(ADRESPORTD, 0xFE);
+Sensor svhr(ADRESPORTD, 0xFD);
+Sensor svhl(ADRESPORTD, 0xFB);
+Sensor start(ADRESPORTD, 0xF7); //Start schakelaar
+Sensor sahr(ADRESPORTD, 0xEF);
+Sensor sahl(ADRESPORTD, 0xDF);
+Sensor sazl(ADRESPORTD, 0xBF);
+Sensor sazr(ADRESPORTD, 0x7F);
 
 int main()
 {
@@ -36,14 +47,20 @@ int main()
 	List<VoetgangerLicht*> l1, l2, l3;
 	List<Scenario*> s;
 
+	//Lijst l1 vullen
 	l1.push_back(&azl);
 	l1.push_back(&azr);
+
+	//Lijst l2 vullen
 	l2.push_back(&ahl);
 	l2.push_back(&ahr);
+
+	//Lijst l3 vullen
 	l3.push_back(&vhr);
 	l3.push_back(&vz);
 	l3.push_back(&vhl);
 	
+	//Scenario's definieren
 	Scenario s1(&l1);
 	Scenario s2(&l2);
 	Scenario s3(&l3);
