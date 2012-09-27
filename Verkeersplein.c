@@ -33,39 +33,25 @@ int main()
 	VoetgangerLicht vz(0xBF, 0x7F, ADRESPORTB);
 	VoetgangerLicht vhl(0xBF, 0x7F, ADRESPORTC);
 
-	List<AutoLicht*> a1;
-	List<AutoLicht*> a2;
-	List<AutoLicht*> al;
-	List<AutoLicht*> aalles;
-	List<VoetgangerLicht*> valles;
-	List<VoetgangerLicht*> v;
-	List<VoetgangerLicht*> vl;
+	List<VoetgangerLicht*> l1, l2, l3;
 	List<Scenario*> s;
 
-	a1.push_back(&azl);
-	a1.push_back(&azr);
-	a2.push_back(&ahl);
-	a2.push_back(&ahr);
-	v.push_back(&vhr);
-	v.push_back(&vz);
-	v.push_back(&vhl);
-
-	aalles.push_back(&azl);
-	aalles.push_back(&azr);
-	aalles.push_back(&ahl);
-	aalles.push_back(&ahr);
-	valles.push_back(&vhr);
-	valles.push_back(&vz);
-	valles.push_back(&vhl);
+	l1.push_back(&azl);
+	l1.push_back(&azr);
+	l2.push_back(&ahl);
+	l2.push_back(&ahr);
+	l3.push_back(&vhr);
+	l3.push_back(&vz);
+	l3.push_back(&vhl);
 	
-	Scenario s1(&v, &al);
-	Scenario s2(&vl, &a1);
-	Scenario s3(&vl, &a2);
+	Scenario s1(&l1);
+	Scenario s2(&l2);
+	Scenario s3(&l3);
 	s.push_back(&s1);
 	s.push_back(&s2);
 	s.push_back(&s3);
 
-	VerkeersRegelaar vr(&aalles, &valles, &s);
+	VerkeersRegelaar vr(&s);
 	vr.kiesFunctie();
 
 	while(1) {

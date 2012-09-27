@@ -16,6 +16,13 @@ void VoetgangerLicht::lichtNaarGroen() {
 	_SFR_IO8(poort) &= temp;  //Daarna wordt het groene licht aangezet
 }
 
+void VoetgangerLicht::vanGroenNaarRood(int k){
+	if(k%2 == 0){ // Dus bij i = even
+		alleLichtenUit();}
+	else{ 
+		lichtNaarGroen();}
+}
+
 void VoetgangerLicht::alleLichtenUit() {
 	uint8_t temp = ~(groen & rood); //Zorgt ervoor dat alleen de pinnetjes behorend bij groen en rood weer 1 worden
 	_SFR_IO8(poort) |= temp;		//De rest van de pinnetjes van de poort wordt niet aangepast

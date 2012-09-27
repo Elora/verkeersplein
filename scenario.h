@@ -7,15 +7,15 @@ class VoetgangerLicht;
 
 class Scenario {
 	public:
-		Scenario(List<VoetgangerLicht*> *v, List<AutoLicht*> *a);
+		Scenario(List<VoetgangerLicht*> *v);
 		void zetAllesNaarGroen();
 		void zetAllesNaarRood();
-		void voegAutoLichtToe(AutoLicht *a);
-		void voegVoetgangerLichtToe(VoetgangerLicht *v);
+		void zetAllesNaarOranje();
+		void zetAllesUit();
+		void voegLichtToe(VoetgangerLicht *v);
 		
 	private:
-		List<VoetgangerLicht*> *voetgangerlichten;
-		List<AutoLicht*> *autolichten;
+		List<VoetgangerLicht*> *lichten;
 };
 
 #endif

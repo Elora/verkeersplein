@@ -9,6 +9,7 @@ class VoetgangerLicht
 		VoetgangerLicht(uint8_t rood, uint8_t groen, uint8_t poort); //constructor
 		void lichtNaarRood();
 		void lichtNaarGroen();
+		virtual void vanGroenNaarRood(int);
 		virtual void alleLichtenUit();
 
 		//operator overload

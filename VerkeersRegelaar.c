@@ -2,34 +2,25 @@
 #include "avr/delay.h"
 #include "autolicht.h"
 
-VerkeersRegelaar::VerkeersRegelaar(List<AutoLicht*>* a, List<VoetgangerLicht*>* v, List<Scenario*>* s) : autolichten(a), voetgangerlichten(v), scenariolijst(s){
+VerkeersRegelaar::VerkeersRegelaar(List<Scenario*>* s) : scenariolijst(s){
 
 } //In de constructor worden lijsten meegegeven
 
 void VerkeersRegelaar::doeNachtStand(){ //Deze functie voert de nachtstand uit
-	for (int i = 1; voetgangerlichten->geefPositie(i) != 0; i++) //In deze loop worden alle voetgangerlichten uitgezet
-	{
-		voetgangerlichten->geefPositie(i)->alleLichtenUit();
-	}
-
 	int t = 0;
 
 	while(t < 10) //Voorlopig 10x knipperen als test
 	{
-		for (int b = 1; autolichten->geefPositie(b) != 0; b++) //Alle autolichten uit
+		for (int b = 1; scenariolijst->geefPositie(b) != 0; b++) //Alle scenario's langslopen
 		{
-			AutoLicht *temp;
-			temp = autolichten->geefPositie(b);
-			temp->alleLichtenUit();
+			scenariolijst->geefPositie(b)->zetAllesUit(); //Van dat scenario alle lichten uitzetten
 		}
 
 		_delay_ms(10000); //Seconde lang uit
 
-		for (int c = 1; autolichten->geefPositie(c) != 0; c++) //Alle autolichten naar oranje
+		for (int c = 1; scenariolijst->geefPositie(c) != 0; c++) //Alle scenario's langslopen
 		{
-			AutoLicht *temp;
-			temp = autolichten->geefPositie(c);
-			temp->lichtNaarOranje();
+			scenariolijst->geefPositie(c)->zetAllesNaarOranje();
 		}
 
 		_delay_ms(10000); //Seconde lang aan
@@ -59,15 +50,7 @@ void VerkeersRegelaar::doeWachtrij(){
 }
 
 void VerkeersRegelaar::kiesFunctie(){
-doeNachtStand();
-}
-
-void VerkeersRegelaar::voegAutoLichtToe(AutoLicht* a){ //Voeg een autolicht toe aan de lijst autolichten
-	autolichten->push_back(a);
-}
-
-void VerkeersRegelaar::voegVoetgangerLichtToe(VoetgangerLicht* v){ //Voeg een voetgangerlicht toe aan de lijst voetgangerlichten
-	voetgangerlichten->push_back(v);
+	doeStandaardSequentie();
 }
 
 void VerkeersRegelaar::voegScenarioToe(Scenario* s){ //Voeg een scenario toe aan de lijst scenariolijst

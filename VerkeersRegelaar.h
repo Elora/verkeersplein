@@ -11,18 +11,14 @@ class VerkeersRegelaar
 {
 
 	public:
-		VerkeersRegelaar(List<AutoLicht*>*, List<VoetgangerLicht*>*, List<Scenario*>*);
+		VerkeersRegelaar(List<Scenario*>*);
 		void doeNachtStand();
 		void doeStandaardSequentie();
 		void doeWachtrij();
 		void kiesFunctie();
-		void voegAutoLichtToe(AutoLicht*);
-		void voegVoetgangerLichtToe(VoetgangerLicht*);
 		void voegScenarioToe(Scenario*);	
 
 	private:
-		List<AutoLicht*>* autolichten;
-		List<VoetgangerLicht*>* voetgangerlichten;
 		List<Scenario*>* scenariolijst;
 	
 	
