@@ -7,21 +7,23 @@
 #include "scenario.h"
 #include "sensor.h"
 
-// Definieer de adressen van PORTA t/m PORTD
+// Definieer de adressen van PORTA t/m PORTC voor output
 #define ADRESPORTA 0x1B
 #define ADRESPORTB 0x18
 #define ADRESPORTC 0x15
-#define ADRESPORTD 0x12
+
+//Definieer het adres van PIND voor input
+#define ADRESPIND 0x10
 
 //Sensoren definieren
-Sensor svz(ADRESPORTD, 0xFE);
-Sensor svhr(ADRESPORTD, 0xFD);
-Sensor svhl(ADRESPORTD, 0xFB);
-Sensor start(ADRESPORTD, 0xF7); //Start schakelaar
-Sensor sahr(ADRESPORTD, 0xEF);
-Sensor sahl(ADRESPORTD, 0xDF);
-Sensor sazl(ADRESPORTD, 0xBF);
-Sensor sazr(ADRESPORTD, 0x7F);
+Sensor svz(ADRESPIND, 0xFE);
+Sensor svhr(ADRESPIND, 0xFD);
+Sensor svhl(ADRESPIND, 0xFB);
+Sensor start(ADRESPIND, 0xF7); //Start schakelaar
+Sensor sahr(ADRESPIND, 0xEF);
+Sensor sahl(ADRESPIND, 0xDF);
+Sensor sazl(ADRESPIND, 0xBF);
+Sensor sazr(ADRESPIND, 0x7F);
 
 int main()
 {
@@ -29,9 +31,11 @@ int main()
 	DDRA=0xFF;
 	DDRB=0xFF;
 	DDRC=0xFF;
+	DDRD=0x00;
 	PORTA=0xFF;
 	PORTB=0xFF;
 	PORTC=0xFF;
+	PIND=0xFF;
 
 	// Aanmaken van de verschillende autolichtobjecten
 	AutoLicht azl(0xFE, 0xFD, 0xFB, ADRESPORTB);
@@ -43,6 +47,11 @@ int main()
 	VoetgangerLicht vhr(0xFE, 0xFD, ADRESPORTA);
 	VoetgangerLicht vz(0xBF, 0x7F, ADRESPORTB);
 	VoetgangerLicht vhl(0xBF, 0x7F, ADRESPORTC);
+
+	//Testen van sensor
+	//if(svz.isGeactiveert())
+	//	vz.lichtNaarGroen();
+
 
 	List<VoetgangerLicht*> l1, l2, l3;
 	List<Scenario*> s;
