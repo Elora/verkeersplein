@@ -16,3 +16,7 @@ bool Sensor::isGeactiveert() {
 void Sensor::kenScenarioToe(Scenario* s) {	//Ken scenario toe aan sensor
 	scenario = s;
 }
+
+Scenario* Sensor::geefScenario(void) {
+	return scenario;
+}

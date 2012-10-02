@@ -12,18 +12,18 @@
 #define ADRESPORTB 0x18
 #define ADRESPORTC 0x15
 
-//Definieer het adres van PIND voor input
-#define ADRESPIND 0x10
+//Definieer het adres van PINE voor input
+#define ADRESPINE 0x01
 
 //Sensoren definieren
-Sensor svz(ADRESPIND, 0xFE);
-Sensor svhr(ADRESPIND, 0xFD);
-Sensor svhl(ADRESPIND, 0xFB);
-Sensor start(ADRESPIND, 0xF7); //Start schakelaar
-Sensor sahr(ADRESPIND, 0xEF);
-Sensor sahl(ADRESPIND, 0xDF);
-Sensor sazl(ADRESPIND, 0xBF);
-Sensor sazr(ADRESPIND, 0x7F);
+Sensor svz(ADRESPINE, 0xFE);
+Sensor svhr(ADRESPINE, 0xFD);
+Sensor svhl(ADRESPINE, 0xFB);
+Sensor start(ADRESPINE, 0xF7); //Start schakelaar
+Sensor sahr(ADRESPINE, 0xEF);
+Sensor sahl(ADRESPINE, 0xDF);
+Sensor sazl(ADRESPINE, 0xBF);
+Sensor sazr(ADRESPINE, 0x7F);
 
 int main()
 {
@@ -31,11 +31,14 @@ int main()
 	DDRA=0xFF;
 	DDRB=0xFF;
 	DDRC=0xFF;
-	DDRD=0x00;
 	PORTA=0xFF;
 	PORTB=0xFF;
 	PORTC=0xFF;
-	PIND=0xFF;
+	
+
+	//Stel odnerstaande poorten in op Input en laad allemaal enen in
+	DDRE=0x00;
+	PINE=0xFF;
 
 	// Aanmaken van de verschillende autolichtobjecten
 	AutoLicht azl(0xFE, 0xFD, 0xFB, ADRESPORTB);
@@ -76,6 +79,15 @@ int main()
 	s.push_back(&s1);
 	s.push_back(&s2);
 	s.push_back(&s3);
+
+	//Scenario's toekennen aan sensoren
+	svz.kenScenarioToe(&s3);
+	svhr.kenScenarioToe(&s3);
+	svhl.kenScenarioToe(&s3);
+	sahr.kenScenarioToe(&s2);
+	sahl.kenScenarioToe(&s2);
+	sazl.kenScenarioToe(&s1);
+	sazr.kenScenarioToe(&s1);
 
 	VerkeersRegelaar vr(&s);
 	vr.kiesFunctie();
