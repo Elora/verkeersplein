@@ -17,6 +17,6 @@ void WachtrijBeheerder::haalEersteUitWachtrij(){
 	wachtrij->pop_front();
 }
 
-Scenario* WachtrijBeheerder::geefEersteInWachtrij(Scenario *s){
+Scenario* WachtrijBeheerder::geefEersteInWachtrij(){
 	return wachtrij->krijgKop();
 }

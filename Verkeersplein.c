@@ -6,6 +6,7 @@
 #include "verkeersregelaar.h"
 #include "scenario.h"
 #include "sensor.h"
+#include "wachtrijbeheerder.h"
 
 // Definieer de adressen van PORTA t/m PORTC voor output
 #define ADRESPORTA 0x1B
@@ -24,6 +25,10 @@ Sensor sahr(ADRESPINE, 0xEF);
 Sensor sahl(ADRESPINE, 0xDF);
 Sensor sazl(ADRESPINE, 0xBF);
 Sensor sazr(ADRESPINE, 0x7F);
+
+//WachtrijBeheerder definieren en hem een lijst meegeven
+List<Scenario*> wachtrij;
+WachtrijBeheerder wachtrijbeheerder(&wachtrij);
 
 int main()
 {
@@ -89,7 +94,7 @@ int main()
 	sazl.kenScenarioToe(&s1);
 	sazr.kenScenarioToe(&s1);
 
-	VerkeersRegelaar vr(&s);
+	VerkeersRegelaar vr(&s, &wachtrijbeheerder);
 	vr.kiesFunctie();
 
 	while(1) {
