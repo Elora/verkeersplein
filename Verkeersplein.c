@@ -30,6 +30,37 @@ Sensor sazr(ADRESPINE, 0x7F);
 List<Scenario*> wachtrij;
 WachtrijBeheerder wachtrijbeheerder(&wachtrij);
 
+ISR(TIMER0_OVF_vect) {
+	if(svz.isGeactiveert() != false) {
+		Scenario* scenario = svz.geefScenario();
+		wachtrijbeheerder.voegToe(scenario);
+	}
+	if(svhr.isGeactiveert() != false) {
+		Scenario* scenario = svhr.geefScenario();
+		wachtrijbeheerder.voegToe(scenario);
+	}
+	if(svhl.isGeactiveert() != false) {
+		Scenario* scenario = svhl.geefScenario();
+		wachtrijbeheerder.voegToe(scenario);
+	}
+	if(sahr.isGeactiveert() != false) {
+		Scenario* scenario = sahr.geefScenario();
+		wachtrijbeheerder.voegToe(scenario);
+	}
+	if(sahl.isGeactiveert() != false) {
+		Scenario* scenario = sahl.geefScenario();
+		wachtrijbeheerder.voegToe(scenario);
+	}
+	if(sazl.isGeactiveert() != false) {
+		Scenario* scenario = sazl.geefScenario();
+		wachtrijbeheerder.voegToe(scenario);
+	}
+	if(sazr.isGeactiveert() != false) {
+		Scenario* scenario = sazr.geefScenario();
+		wachtrijbeheerder.voegToe(scenario);
+	}
+}
+
 int main()
 {
 	//Stel onderstaande poorten in op Output en laad allemaal enen in
@@ -39,8 +70,11 @@ int main()
 	PORTA=0xFF;
 	PORTB=0xFF;
 	PORTC=0xFF;
-	
 
+	//Stel de timer in die een interrupt genereert bij en overflow
+	TCCR0=0x05;
+	TIMSK=0x01;
+	
 	//Stel odnerstaande poorten in op Input en laad allemaal enen in
 	DDRE=0x00;
 	PINE=0xFF;
@@ -95,9 +129,10 @@ int main()
 	sazr.kenScenarioToe(&s1);
 
 	VerkeersRegelaar vr(&s, &wachtrijbeheerder);
-	vr.kiesFunctie();
+	
+	sei(); //Zet interrupts aan
 
 	while(1) {
-		PINE = PINE;
+		vr.kiesFunctie();
 	}
 }

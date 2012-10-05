@@ -15,14 +15,14 @@ void VerkeersRegelaar::doeNachtStand(){ //Deze functie voert de nachtstand uit
 			scenariolijst->geefPositie(b)->zetAllesUit(); //Van dat scenario alle lichten uitzetten
 		}
 
-		_delay_ms(10000); //Seconde lang uit
+		_delay_ms(7500); //Seconde lang uit
 
 		for (int c = 1; scenariolijst->geefPositie(c) != 0; c++) //Alle scenario's langslopen
 		{
 			scenariolijst->geefPositie(c)->zetAllesNaarOranje();
 		}
 
-		_delay_ms(10000); //Seconde lang aan
+		_delay_ms(7500); //Seconde lang aan
 
 		t++;
 	}
@@ -32,7 +32,7 @@ void VerkeersRegelaar::doeStandaardSequentie() { //Deze functie voert de standaa
 	for (int i = 1; scenariolijst->geefPositie(i) != 0; i++) { //Doorloop alle scenario's omstebeurt
 		Scenario* scenario = scenariolijst->geefPositie(i);
 		scenario->zetAllesNaarGroen(); 	//In het scenario alles naar groen zetten
-		for(int n = 0; n < 20; n++)
+		for(int n = 0; n < 15; n++)
 			_delay_ms(5000);				//Een bepaalde tijd wachten
 		scenario->zetAllesNaarRood();	//En alles weer naar rood laten gaan
 		for(int n = 0; n < 10; n++)
@@ -49,18 +49,19 @@ void VerkeersRegelaar::doeWachtrij(){
 	while(wachtrijbeheerder->geefEersteInWachtrij() != 0) {  //Wanneer er iets in de wachtrij staat wordt de loop doorlopen
 		Scenario* scenario = wachtrijbeheerder->geefEersteInWachtrij(); //Het eerste scenario uit de wachtrij wordt gegeven
 		scenario->zetAllesNaarGroen(); 	//In het scenario alles naar groen zetten
-		for(int n = 0; n < 20; n++)
+		for(int n = 0; n < 15; n++)
 			_delay_ms(5000);				//Een bepaalde tijd wachten
 		scenario->zetAllesNaarRood();	//En alles weer naar rood laten gaan
+		wachtrijbeheerder->haalEersteUitWachtrij(); //Het eerste scenario uit de wachtrij halen
 		for(int n = 0; n < 10; n++)
 			_delay_ms(5000);			//En 5 sec wachten voordat het volgende scenario op groen gaat
-		wachtrijbeheerder->haalEersteUitWachtrij(); //Het eerste scenario uit de wachtrij halen
+		
 	}
 
 }
 
 void VerkeersRegelaar::kiesFunctie(){
-	doeWachtrij();
+	doeNachtStand();
 }
 
 void VerkeersRegelaar::voegScenarioToe(Scenario* s){ //Voeg een scenario toe aan de lijst scenariolijst
