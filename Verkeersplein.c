@@ -6,22 +6,29 @@
 #include "verkeersregelaar.h"
 #include "scenario.h"
 #include "sensor.h"
+#include "wachtrijbeheerder.h"
 
-// Definieer de adressen van PORTA t/m PORTD
+// Definieer de adressen van PORTA t/m PORTC voor output
 #define ADRESPORTA 0x1B
 #define ADRESPORTB 0x18
 #define ADRESPORTC 0x15
-#define ADRESPORTD 0x12
+
+//Definieer het adres van PINE voor input
+#define ADRESPINE 0x01
 
 //Sensoren definieren
-Sensor svz(ADRESPORTD, 0xFE);
-Sensor svhr(ADRESPORTD, 0xFD);
-Sensor svhl(ADRESPORTD, 0xFB);
-Sensor start(ADRESPORTD, 0xF7); //Start schakelaar
-Sensor sahr(ADRESPORTD, 0xEF);
-Sensor sahl(ADRESPORTD, 0xDF);
-Sensor sazl(ADRESPORTD, 0xBF);
-Sensor sazr(ADRESPORTD, 0x7F);
+Sensor svz(ADRESPINE, 0xFE);
+Sensor svhr(ADRESPINE, 0xFD);
+Sensor svhl(ADRESPINE, 0xFB);
+Sensor start(ADRESPINE, 0xF7); //Start schakelaar
+Sensor sahr(ADRESPINE, 0xEF);
+Sensor sahl(ADRESPINE, 0xDF);
+Sensor sazl(ADRESPINE, 0xBF);
+Sensor sazr(ADRESPINE, 0x7F);
+
+//WachtrijBeheerder definieren en hem een lijst meegeven
+List<Scenario*> wachtrij;
+WachtrijBeheerder wachtrijbeheerder(&wachtrij);
 
 int main()
 {
@@ -32,6 +39,11 @@ int main()
 	PORTA=0xFF;
 	PORTB=0xFF;
 	PORTC=0xFF;
+	
+
+	//Stel odnerstaande poorten in op Input en laad allemaal enen in
+	DDRE=0x00;
+	PINE=0xFF;
 
 	// Aanmaken van de verschillende autolichtobjecten
 	AutoLicht azl(0xFE, 0xFD, 0xFB, ADRESPORTB);
@@ -43,6 +55,11 @@ int main()
 	VoetgangerLicht vhr(0xFE, 0xFD, ADRESPORTA);
 	VoetgangerLicht vz(0xBF, 0x7F, ADRESPORTB);
 	VoetgangerLicht vhl(0xBF, 0x7F, ADRESPORTC);
+
+	//Testen van sensor
+	//if(svz.isGeactiveert())
+	//	vz.lichtNaarGroen();
+
 
 	List<VoetgangerLicht*> l1, l2, l3;
 	List<Scenario*> s;
@@ -68,7 +85,16 @@ int main()
 	s.push_back(&s2);
 	s.push_back(&s3);
 
-	VerkeersRegelaar vr(&s);
+	//Scenario's toekennen aan sensoren
+	svz.kenScenarioToe(&s3);
+	svhr.kenScenarioToe(&s3);
+	svhl.kenScenarioToe(&s3);
+	sahr.kenScenarioToe(&s2);
+	sahl.kenScenarioToe(&s2);
+	sazl.kenScenarioToe(&s1);
+	sazr.kenScenarioToe(&s1);
+
+	VerkeersRegelaar vr(&s, &wachtrijbeheerder);
 	vr.kiesFunctie();
 
 	while(1) {

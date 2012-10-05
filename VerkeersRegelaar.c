@@ -1,8 +1,7 @@
 #include "VerkeersRegelaar.h"
 #include "avr/delay.h"
-#include "autolicht.h"
 
-VerkeersRegelaar::VerkeersRegelaar(List<Scenario*>* s) : scenariolijst(s){
+VerkeersRegelaar::VerkeersRegelaar(List<Scenario*>* s, WachtrijBeheerder* w) : scenariolijst(s), wachtrijbeheerder(w) {
 
 } //In de constructor worden lijsten meegegeven
 
@@ -47,10 +46,21 @@ void VerkeersRegelaar::doeStandaardSequentie() { //Deze functie voert de standaa
 
 void VerkeersRegelaar::doeWachtrij(){
 
+	while(wachtrijbeheerder->geefEersteInWachtrij() != 0) {  //Wanneer er iets in de wachtrij staat wordt de loop doorlopen
+		Scenario* scenario = wachtrijbeheerder->geefEersteInWachtrij(); //Het eerste scenario uit de wachtrij wordt gegeven
+		scenario->zetAllesNaarGroen(); 	//In het scenario alles naar groen zetten
+		for(int n = 0; n < 20; n++)
+			_delay_ms(5000);				//Een bepaalde tijd wachten
+		scenario->zetAllesNaarRood();	//En alles weer naar rood laten gaan
+		for(int n = 0; n < 10; n++)
+			_delay_ms(5000);			//En 5 sec wachten voordat het volgende scenario op groen gaat
+		wachtrijbeheerder->haalEersteUitWachtrij(); //Het eerste scenario uit de wachtrij halen
+	}
+
 }
 
 void VerkeersRegelaar::kiesFunctie(){
-	doeStandaardSequentie();
+	doeWachtrij();
 }
 
 void VerkeersRegelaar::voegScenarioToe(Scenario* s){ //Voeg een scenario toe aan de lijst scenariolijst

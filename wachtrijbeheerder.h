@@ -11,7 +11,7 @@ public:
     void voegToe(Scenario*);
 	bool doorzoekWachtrij(Scenario*);
 	void haalEersteUitWachtrij();
-	Scenario* geefEersteInWachtrij(Scenario*);
+	Scenario* geefEersteInWachtrij();
 
 private:
 	List<Scenario*> *wachtrij;
