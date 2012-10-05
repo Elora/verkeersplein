@@ -30,34 +30,42 @@ Sensor sazr(ADRESPINE, 0x7F);
 List<Scenario*> wachtrij;
 WachtrijBeheerder wachtrijbeheerder(&wachtrij);
 
+//Globale variabele nacht voor de nachtstand
+bool nacht = false;
+
 ISR(TIMER0_OVF_vect) {
-	if(svz.isGeactiveert() != false) {
-		Scenario* scenario = svz.geefScenario();
-		wachtrijbeheerder.voegToe(scenario);
-	}
-	if(svhr.isGeactiveert() != false) {
-		Scenario* scenario = svhr.geefScenario();
-		wachtrijbeheerder.voegToe(scenario);
-	}
-	if(svhl.isGeactiveert() != false) {
-		Scenario* scenario = svhl.geefScenario();
-		wachtrijbeheerder.voegToe(scenario);
-	}
-	if(sahr.isGeactiveert() != false) {
-		Scenario* scenario = sahr.geefScenario();
-		wachtrijbeheerder.voegToe(scenario);
-	}
-	if(sahl.isGeactiveert() != false) {
-		Scenario* scenario = sahl.geefScenario();
-		wachtrijbeheerder.voegToe(scenario);
-	}
-	if(sazl.isGeactiveert() != false) {
-		Scenario* scenario = sazl.geefScenario();
-		wachtrijbeheerder.voegToe(scenario);
-	}
-	if(sazr.isGeactiveert() != false) {
-		Scenario* scenario = sazr.geefScenario();
-		wachtrijbeheerder.voegToe(scenario);
+	//Onderstaande wordt alleen uitgevoerd wanneer het geen nacht is
+	if(nacht == false) {
+		//Hieronder wordt voor elke sensor gecontroleerd of hij op dit moment wordt ingedrukt
+		//Als dat het geval is wordt het bijbehorende scenario in de wachtrij geplaatst
+		if(svz.isGeactiveert() != false) {
+			Scenario* scenario = svz.geefScenario();
+			wachtrijbeheerder.voegToe(scenario);
+		}
+		if(svhr.isGeactiveert() != false) {
+			Scenario* scenario = svhr.geefScenario();
+			wachtrijbeheerder.voegToe(scenario);
+		}
+		if(svhl.isGeactiveert() != false) {
+			Scenario* scenario = svhl.geefScenario();
+			wachtrijbeheerder.voegToe(scenario);
+		}
+		if(sahr.isGeactiveert() != false) {
+			Scenario* scenario = sahr.geefScenario();
+			wachtrijbeheerder.voegToe(scenario);
+		}
+		if(sahl.isGeactiveert() != false) {
+			Scenario* scenario = sahl.geefScenario();
+			wachtrijbeheerder.voegToe(scenario);
+		}
+		if(sazl.isGeactiveert() != false) {
+			Scenario* scenario = sazl.geefScenario();
+			wachtrijbeheerder.voegToe(scenario);
+		}
+		if(sazr.isGeactiveert() != false) {
+			Scenario* scenario = sazr.geefScenario();
+			wachtrijbeheerder.voegToe(scenario);
+		}
 	}
 }
 
