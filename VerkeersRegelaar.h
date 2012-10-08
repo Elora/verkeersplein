@@ -6,14 +6,16 @@
 #include "autolicht.h"
 #include "scenario.h"
 #include "wachtrijbeheerder.h"
+#include "nachtwaarder.h"
 
 
 class VerkeersRegelaar
 {
 
 	public:
-		VerkeersRegelaar(List<Scenario*>*, WachtrijBeheerder*);
+		VerkeersRegelaar(List<Scenario*>*, WachtrijBeheerder*, NachtWaarder*);
 		void doeNachtStand();
+		void komtUitNachtStand();
 		void doeStandaardSequentie();
 		void doeWachtrij();
 		void kiesFunctie();
@@ -22,6 +24,7 @@ class VerkeersRegelaar
 	private:
 		List<Scenario*>* scenariolijst;
 		WachtrijBeheerder* wachtrijbeheerder;
+		NachtWaarder* nachtwaarder;
 	
 	
 };

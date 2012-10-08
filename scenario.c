@@ -33,7 +33,7 @@ void Scenario::zetAllesNaarRood() {
 		}
 		_delay_ms(4000); //Een bepaalde tijd wachten
 	}
-	//"Zet van alle stoplichten uit scenario .. het licht op rood"
+	//Zet van alle stoplichten uit scenario .. het licht op rood
 	for (int i = 1; lichten->geefPositie(i) != 0; i++)
 	{
 		lichten->geefPositie(i)->lichtNaarRood();
