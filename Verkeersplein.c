@@ -7,6 +7,7 @@
 #include "scenario.h"
 #include "sensor.h"
 #include "wachtrijbeheerder.h"
+#include "nachtwaarder.h"
 
 // Definieer de adressen van PORTA t/m PORTC voor output
 #define ADRESPORTA 0x1B
@@ -30,12 +31,12 @@ Sensor sazr(ADRESPINE, 0x7F);
 List<Scenario*> wachtrij;
 WachtrijBeheerder wachtrijbeheerder(&wachtrij);
 
-//Globale variabele nacht voor de nachtstand
-bool nacht = false;
+//NachtWaarder definieren. Dit object houdt bij of het nacht is of niet
+NachtWaarder nachtwaarder;
 
 ISR(TIMER0_OVF_vect) {
 	//Onderstaande wordt alleen uitgevoerd wanneer het geen nacht is
-	if(nacht == false) {
+	if(nachtwaarder.krijgNacht() == false) {
 		//Hieronder wordt voor elke sensor gecontroleerd of hij op dit moment wordt ingedrukt
 		//Als dat het geval is wordt het bijbehorende scenario in de wachtrij geplaatst
 		if(svz.isGeactiveert() != false) {
@@ -98,11 +99,6 @@ int main()
 	VoetgangerLicht vz(0xBF, 0x7F, ADRESPORTB);
 	VoetgangerLicht vhl(0xBF, 0x7F, ADRESPORTC);
 
-	//Testen van sensor
-	//if(svz.isGeactiveert())
-	//	vz.lichtNaarGroen();
-
-
 	List<VoetgangerLicht*> l1, l2, l3;
 	List<Scenario*> s;
 
@@ -136,7 +132,7 @@ int main()
 	sazl.kenScenarioToe(&s1);
 	sazr.kenScenarioToe(&s1);
 
-	VerkeersRegelaar vr(&s, &wachtrijbeheerder);
+	VerkeersRegelaar vr(&s, &wachtrijbeheerder, &nachtwaarder);
 	
 	sei(); //Zet interrupts aan
 
