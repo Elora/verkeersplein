@@ -15,6 +15,7 @@ class VerkeersRegelaar
 	public:
 		VerkeersRegelaar(List<Scenario*>*, WachtrijBeheerder*, NachtWaarder*);
 		void doeNachtStand();
+		void komtUitNachtStand();
 		void doeStandaardSequentie();
 		void doeWachtrij();
 		void kiesFunctie();

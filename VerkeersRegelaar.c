@@ -23,6 +23,25 @@ void VerkeersRegelaar::doeNachtStand(){ //Deze functie voert de nachtstand uit
 
 		_delay_ms(7500); //Seconde lang aan
 	}
+	komtUitNachtStand();
+}
+
+void VerkeersRegelaar::komtUitNachtStand() { //Deze functie voert de standaard sequentie uit
+	
+	for (int i = 1; scenariolijst->geefPositie(i) != 0; i++) { //Doorloop alle scenario's omstebeurt
+		Scenario* scenario = scenariolijst->geefPositie(i);
+		scenario->zetAllesNaarGroen(); 	//In het scenario alles naar groen zetten
+		for(int n = 0; n < 15; n++)
+			_delay_ms(5000);				//Een bepaalde tijd wachten
+		scenario->zetAllesNaarRood();	//En alles weer naar rood laten gaan
+		for(int n = 0; n < 10; n++)
+			_delay_ms(5000);			//En 5 sec wachten voordat het volgende scenario op groen gaat
+
+		int j = i + 1;	
+		if(scenariolijst->geefPositie(j) == 0)	//Checken of de volgende positie in scenariolijst een scenario bevat
+			i = 0;								//Zo niet, dan begint de lijst weer van voor af aan
+												//i wordt op 0 gezet ipv op 1 omdat aan het eind van de loop er eentje wordt opgeteld
+	}											
 }
 
 void VerkeersRegelaar::doeStandaardSequentie() { //Deze functie voert de standaard sequentie uit
@@ -66,7 +85,12 @@ void VerkeersRegelaar::doeWachtrij(){
 }
 
 void VerkeersRegelaar::kiesFunctie(){
-	doeStandaardSequentie();
+	if (nachtwaarder->krijgNacht() == true)
+		doeNachtStand();
+	else if (wachtrijbeheerder->geefEersteInWachtrij() != 0)
+		doeWachtrij();
+	else
+		doeStandaardSequentie();
 }
 
 void VerkeersRegelaar::voegScenarioToe(Scenario* s){ //Voeg een scenario toe aan de lijst scenariolijst
