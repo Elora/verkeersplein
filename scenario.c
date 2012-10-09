@@ -24,9 +24,11 @@ void Scenario::zetAllesNaarGroen() {
 	}
 }
 
+//Zet van elk scenario de verkeerslichten eerst in de "tussenstand" en daarna naar rood.
+//De tussenstand is de stand die wordt uigevoerd wanneer een verkeerslicht van groen naar rood gaat
 void Scenario::zetAllesNaarRood() { 
-	for(int k=0; k <6; k++) //Roept 6 keer de tussen fase van Groen naar Rood bij alle lichten aan
-	{
+	for(int k=0; k <6; k++) //Roept 6 keer de tussenfase van Groen naar Rood bij alle lichten aan
+	{						//Hierdoor gaan de voetgangerslichten groen knipperen en blijven de autolichten oranje
 		for (int c = 1; lichten->geefPositie(c) != 0; c++)
 		{
 			lichten->geefPositie(c)->vanGroenNaarRood(k);
@@ -38,6 +40,21 @@ void Scenario::zetAllesNaarRood() {
 	{
 		lichten->geefPositie(i)->lichtNaarRood();
 	}
+}
+
+//Zet alle verkeerslichten binnen het scenario meteen op rood
+void Scenario::allesDirectRood() { 
+	VoetgangerLicht* vObj = lichten->krijgKop();
+	uint8_t i = 1;
+
+	//Als er geen object gevonden wordt wordt er 0 gegeven
+	while(vObj != 0) {
+		vObj->lichtNaarRood();
+		i++;
+		//Haal een voetganger uit de lijst op de locatie van iterator i
+		vObj = lichten->geefPositie(i);
+	}
+
 }
 
 void Scenario::zetAllesUit() {

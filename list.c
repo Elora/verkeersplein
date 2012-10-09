@@ -67,6 +67,10 @@ if (kop != 0) //Verwijderd de laatse waarde uit de lijst zolang de lijst niet le
     }
 }
 
+template <typename T> void List<T>::leegLijst(){
+	while(kop!=0) pop_front();
+}
+
 template <typename T> bool List<T>::komtAlVoor(T in){
 // Kijkt of de waarde al in de lijst voorkomt
     for (hulp = kop; hulp != 0; hulp = hulp->next)
@@ -82,6 +86,33 @@ template <typename T> T List<T>::krijgKop(){
         return kop->data;
     else
         return 0;
+}
+
+template <typename T> void List<T>::haalUitLijst(T uit){
+	struct lijst* hulp2;
+    if (kop != 0)
+    {
+        if (kop->data == uit)
+        {
+            hulp = kop->next;
+            free(kop);
+            kop = hulp;
+        }
+        else
+        {
+            for (hulp = kop; hulp != staart; )
+            {
+                if (hulp->next->data == uit)
+                {
+                    hulp2 = hulp->next->next;
+                    free(hulp->next);
+                    hulp->next = hulp2;
+                    hulp = staart;
+                }
+                else hulp = hulp->next;
+            }
+        }
+    }
 }
 
 template <typename T> T List<T>::geefPositie(int positie){

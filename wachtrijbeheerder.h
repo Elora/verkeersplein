@@ -11,6 +11,8 @@ public:
     void voegToe(Scenario*);
 	bool doorzoekWachtrij(Scenario*);
 	void haalEersteUitWachtrij();
+	void haalUitWachtrij(Scenario*);
+	void leegWachtrij();
 	Scenario* geefEersteInWachtrij();
 
 private:

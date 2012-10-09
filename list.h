@@ -9,6 +9,8 @@ public:
     void push_back(T);
     void pop_front();
     void pop_back();
+	void haalUitLijst(T);
+	void leegLijst();
     bool komtAlVoor(T);
     T krijgKop();
     T geefPositie(int);
