@@ -12,6 +12,7 @@ class Scenario {
 		void zetAllesNaarRood();
 		void zetAllesNaarOranje();
 		void zetAllesUit();
+		void allesDirectRood();
 		void voegLichtToe(VoetgangerLicht *v);
 		
 	private:

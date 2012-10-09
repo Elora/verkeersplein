@@ -1,5 +1,6 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <avr/delay.h>
 #include "voetgangerlicht.h"
 #include "autolicht.h"
 #include "list.c"
@@ -8,6 +9,7 @@
 #include "sensor.h"
 #include "wachtrijbeheerder.h"
 #include "nachtwaarder.h"
+#include "Serial.h"
 
 // Definieer de adressen van PORTA t/m PORTC voor output
 #define ADRESPORTA 0x1B
@@ -27,6 +29,9 @@ Sensor sahl(ADRESPINE, 0xDF);
 Sensor sazl(ADRESPINE, 0xBF);
 Sensor sazr(ADRESPINE, 0x7F);
 
+//Dit is het object dat de seriele communicatie beheert
+Serial serial;
+
 //WachtrijBeheerder definieren en hem een lijst meegeven
 List<Scenario*> wachtrij;
 WachtrijBeheerder wachtrijbeheerder(&wachtrij);
@@ -35,6 +40,15 @@ WachtrijBeheerder wachtrijbeheerder(&wachtrij);
 NachtWaarder nachtwaarder;
 
 ISR(TIMER0_OVF_vect) {
+	
+	
+	uint8_t *p; 
+	if(serial.lees_serial(p) == 0)
+		serial.schrijf_serial(*p);
+	_delay_ms(1);
+
+	nachtwaarder.zetNacht(start.isGeactiveert());
+	
 	//Onderstaande wordt alleen uitgevoerd wanneer het geen nacht is
 	if(nachtwaarder.krijgNacht() == false) {
 		//Hieronder wordt voor elke sensor gecontroleerd of hij op dit moment wordt ingedrukt
@@ -87,6 +101,8 @@ int main()
 	//Stel odnerstaande poorten in op Input en laad allemaal enen in
 	DDRE=0x00;
 	PINE=0xFF;
+
+	serial.init();
 
 	// Aanmaken van de verschillende autolichtobjecten
 	AutoLicht azl(0xFE, 0xFD, 0xFB, ADRESPORTB);

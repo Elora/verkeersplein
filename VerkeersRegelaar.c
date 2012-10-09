@@ -28,6 +28,16 @@ void VerkeersRegelaar::doeNachtStand(){ //Deze functie voert de nachtstand uit
 
 void VerkeersRegelaar::komtUitNachtStand() { 	//Deze functie wordt aangeroepen bij de overgang van nacht naar dag
 												//Alle scenario's worden eenmalig langsgelopen in hun vaste patroon
+	
+	//Eerst wordt van alle scenario's alle verkeerslichten op rood gezet
+	for (int i = 1; scenariolijst->geefPositie(i) != 0; i++) { 
+		Scenario* scenario = scenariolijst->geefPositie(i);
+		scenario->allesDirectRood();
+	}
+	
+	for(int n = 0; n < 10; n++)
+			_delay_ms(5000);		//Vijf seconden wachten 
+
 	for (int i = 1; scenariolijst->geefPositie(i) != 0; i++) { //Doorloop alle scenario's omstebeurt
 		Scenario* scenario = scenariolijst->geefPositie(i);
 		scenario->zetAllesNaarGroen(); 	//In het scenario alles naar groen zetten
