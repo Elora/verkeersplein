@@ -3,7 +3,7 @@
 
 VerkeersRegelaar::VerkeersRegelaar(List<Scenario*>* s, WachtrijBeheerder* w, NachtWaarder* n) : scenariolijst(s), wachtrijbeheerder(w), nachtwaarder(n) {
 
-} //In de constructor worden lijsten meegegeven
+} //In de constructor wordt een lijst met scenario's meegegeven, een wachtrijbeheerder en een nachtwaarder
 
 void VerkeersRegelaar::doeNachtStand(){ //Deze functie voert de nachtstand uit
 
@@ -26,8 +26,8 @@ void VerkeersRegelaar::doeNachtStand(){ //Deze functie voert de nachtstand uit
 	komtUitNachtStand();
 }
 
-void VerkeersRegelaar::komtUitNachtStand() { //Deze functie voert de standaard sequentie uit
-	
+void VerkeersRegelaar::komtUitNachtStand() { 	//Deze functie wordt aangeroepen bij de overgang van nacht naar dag
+												//Alle scenario's worden eenmalig langsgelopen in hun vaste patroon
 	for (int i = 1; scenariolijst->geefPositie(i) != 0; i++) { //Doorloop alle scenario's omstebeurt
 		Scenario* scenario = scenariolijst->geefPositie(i);
 		scenario->zetAllesNaarGroen(); 	//In het scenario alles naar groen zetten
@@ -36,11 +36,6 @@ void VerkeersRegelaar::komtUitNachtStand() { //Deze functie voert de standaard s
 		scenario->zetAllesNaarRood();	//En alles weer naar rood laten gaan
 		for(int n = 0; n < 10; n++)
 			_delay_ms(5000);			//En 5 sec wachten voordat het volgende scenario op groen gaat
-
-		int j = i + 1;	
-		if(scenariolijst->geefPositie(j) == 0)	//Checken of de volgende positie in scenariolijst een scenario bevat
-			i = 0;								//Zo niet, dan begint de lijst weer van voor af aan
-												//i wordt op 0 gezet ipv op 1 omdat aan het eind van de loop er eentje wordt opgeteld
 	}											
 }
 
@@ -66,7 +61,7 @@ void VerkeersRegelaar::doeStandaardSequentie() { //Deze functie voert de standaa
 	}											
 }
 
-void VerkeersRegelaar::doeWachtrij(){
+void VerkeersRegelaar::doeWachtrij() {
 
 	while(wachtrijbeheerder->geefEersteInWachtrij() != 0) {  //Wanneer er iets in de wachtrij staat wordt de loop doorlopen
 		Scenario* scenario = wachtrijbeheerder->geefEersteInWachtrij(); //Het eerste scenario uit de wachtrij wordt gegeven
@@ -84,7 +79,7 @@ void VerkeersRegelaar::doeWachtrij(){
 
 }
 
-void VerkeersRegelaar::kiesFunctie(){
+void VerkeersRegelaar::kiesFunctie() {
 	if (nachtwaarder->krijgNacht() == true)
 		doeNachtStand();
 	else if (wachtrijbeheerder->geefEersteInWachtrij() != 0)
