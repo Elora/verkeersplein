@@ -8,7 +8,7 @@
 #include "scenario.h"
 #include "sensor.h"
 #include "wachtrijbeheerder.h"
-#include "nachtwaarder.h"
+#include "variabelebeheerder.h"
 #include "Serial.h"
 
 // Definieer de adressen van PORTA t/m PORTC voor output
@@ -37,20 +37,26 @@ List<Scenario*> wachtrij;
 WachtrijBeheerder wachtrijbeheerder(&wachtrij);
 
 //NachtWaarder definieren. Dit object houdt bij of het nacht is of niet
-NachtWaarder nachtwaarder;
+VariabeleBeheerder variabelebeheerder(&serial);
 
 ISR(TIMER0_OVF_vect) {
 	
-	
-	uint8_t *p; 
-	if(serial.lees_serial(p) == 0)
-		serial.schrijf_serial(*p);
-	_delay_ms(1);
+	/*uint8_t *p; 
+	if(serial.lees_serial(p) == 0) {
+		tijdoranje = *p * 200;
+		if(*p == 'a')
+			tijdoranje = 200;
+		if(*p == 'b')
+			tijdoranje = 1000;
+	}
+	serial.schrijf_serial(*p);
+	_delay_ms(1);*/
 
-	nachtwaarder.zetNacht(start.isGeactiveert());
+	variabelebeheerder.leesSerielePoort();
+	variabelebeheerder.zetNacht(start.isGeactiveert());
 	
 	//Onderstaande wordt alleen uitgevoerd wanneer het geen nacht is
-	if(nachtwaarder.krijgNacht() == false) {
+	if(variabelebeheerder.krijgNacht() == false) {
 		//Hieronder wordt voor elke sensor gecontroleerd of hij op dit moment wordt ingedrukt
 		//Als dat het geval is wordt het bijbehorende scenario in de wachtrij geplaatst
 		if(svz.isGeactiveert() != false) {
@@ -148,9 +154,12 @@ int main()
 	sazl.kenScenarioToe(&s1);
 	sazr.kenScenarioToe(&s1);
 
-	VerkeersRegelaar vr(&s, &wachtrijbeheerder, &nachtwaarder);
+	VerkeersRegelaar vr(&s, &wachtrijbeheerder, &variabelebeheerder);
 	
 	sei(); //Zet interrupts aan
+
+	//Voordat de kiesFunctie() van start gaat wordt gekeken of de nachtschakelaar aan of uit staat
+	variabelebeheerder.zetNacht(start.isGeactiveert());
 
 	while(1) {
 		vr.kiesFunctie();
