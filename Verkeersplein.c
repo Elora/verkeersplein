@@ -40,19 +40,9 @@ WachtrijBeheerder wachtrijbeheerder(&wachtrij);
 VariabeleBeheerder variabelebeheerder(&serial);
 
 ISR(TIMER0_OVF_vect) {
-	
-	/*uint8_t *p; 
-	if(serial.lees_serial(p) == 0) {
-		tijdoranje = *p * 200;
-		if(*p == 'a')
-			tijdoranje = 200;
-		if(*p == 'b')
-			tijdoranje = 1000;
-	}
-	serial.schrijf_serial(*p);
-	_delay_ms(1);*/
-
+	//Seriele poort wordt uitgelezen
 	variabelebeheerder.leesSerielePoort();
+	//Schakelaar wordt uigelezen om te kunnen schakelen naar de nachtstand
 	variabelebeheerder.zetNacht(start.isGeactiveert());
 	
 	//Onderstaande wordt alleen uitgevoerd wanneer het geen nacht is
@@ -138,9 +128,9 @@ int main()
 	l3.push_back(&vhl);
 	
 	//Scenario's definieren
-	Scenario s1(&l1);
-	Scenario s2(&l2);
-	Scenario s3(&l3);
+	Scenario s1(&l1, &variabelebeheerder);
+	Scenario s2(&l2, &variabelebeheerder);
+	Scenario s3(&l3, &variabelebeheerder);
 	s.push_back(&s1);
 	s.push_back(&s2);
 	s.push_back(&s3);

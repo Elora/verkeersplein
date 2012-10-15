@@ -8,7 +8,7 @@
 
 
 //constructor
-Scenario::Scenario(List<VoetgangerLicht*> *v) : lichten(v){
+Scenario::Scenario(List<VoetgangerLicht*> *v, VariabeleBeheerder* b) : lichten(v), variabelebeheerder(b) {
 
 }
 
@@ -26,16 +26,19 @@ void Scenario::zetAllesNaarGroen() {
 	}
 }
 
-//Zet van elk scenario de verkeerslichten eerst in de "tussenstand" en daarna naar rood.
-//De tussenstand is de stand die wordt uigevoerd wanneer een verkeerslicht van groen naar rood gaat
+//De code hieronder laat van elk scenario de verkeerslichten naar rood gaan
+//Hierbij gaan de voetgangerlichten groen knipperen en de autolichten gaan op oranje
 void Scenario::zetAllesNaarRood() { 
-	for(int k=0; k < 6; k++) //Roept 6 keer de tussenfase van Groen naar Rood bij alle lichten aan
-	{						//Hierdoor gaan de voetgangerslichten groen knipperen en blijven de autolichten oranje
-		for (int c = 1; lichten->geefPositie(c) != 0; c++)
+	
+	//Loopje wordt aantal keer uitgevoerd afhankelijk van de variabele die de variabelebeheerder teruggeeft
+	for(int k=0; k < (variabelebeheerder->krijgVariabele('0') * 2); k++)
+	{	
+		//Hierdoor gaan de voetgangerslichten groen knipperen en blijven de autolichten oranje					
+		for (int c = 1; lichten->geefPositie(c) != 0; c++) 
 		{
-			lichten->geefPositie(c)->vanGroenNaarRood(k);
+			lichten->geefPositie(c)->vanGroenNaarRood(k); 
 		}
-		_delay_ms(500); //Een bepaalde tijd wachten
+		_delay_ms(500); //Een halve seconde wachten
 	}
 	//Zet van alle stoplichten uit scenario .. het licht op rood
 	for (int i = 1; lichten->geefPositie(i) != 0; i++)

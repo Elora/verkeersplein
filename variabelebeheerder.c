@@ -11,8 +11,16 @@ bool VariabeleBeheerder::krijgNacht(void) {
 	return nacht;
 }
 
+
+/*
+Onderstaande functie geeft de waarde van een variabele terug. De volgende parameters kunnen worden meegegeven:
+'o' : oranjetijd
+'g' : groentijd
+'r' : roodtijd
+'n' : nachtstandtijd
+*/
 int VariabeleBeheerder::krijgVariabele(char v) {
-	switch (v) {	//Ken dat getal toe aan het type dat op dit moment actief is
+	switch (v) {	
 		case 'g':
 			return groentijd;
 			break;

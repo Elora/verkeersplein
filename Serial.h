@@ -3,8 +3,6 @@
 
 #include <avr/io.h>
 
-#define BAUD 51
-
 class Serial {
 	public:
 		Serial();
@@ -14,6 +12,9 @@ class Serial {
 		void writeInteger(int16_t, uint8_t);
 		uint8_t lees_serial(uint8_t*);
 		void schrijf_serial(uint8_t d);
+
+	private:
+		int baud;
 };
 
 #endif

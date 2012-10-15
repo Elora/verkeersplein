@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "Serial.h"
 
-Serial::Serial()
+Serial::Serial() : baud(51)
 {
 
 }
@@ -11,8 +11,8 @@ void Serial::init() {
 	UCSR0A=0x00;  
 	UCSR0B=(1 << TXEN1)|(1 << RXEN1);
 	UCSR0C=(1 << UCSZ11) | (1 << UCSZ10);
-	UBRR0L=(BAUD);
-	UBRR0H=(BAUD >> 8);
+	UBRR0L=(baud);
+	UBRR0H=(baud >> 8);
 }
 
 void Serial::schrijf_serial(uint8_t d)
