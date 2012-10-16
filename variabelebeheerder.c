@@ -49,16 +49,23 @@ void VariabeleBeheerder::leesSerielePoort(void) {
 			nacht = true;
 		else if (*p == 'u')	//Als hetgeen op de lijn een 'u' is, zet de variabele nacht op false
 			nacht = false;
-		else {				//Wanneer bovenstaande niet geldt, wordt er een getal doorgestuurd
+		else {			//Wanneer bovenstaande niet geldt, wordt er een getal doorgestuurd
 			switch (type) {	//Ken dat getal toe aan het type dat op dit moment actief is
 				case 'g':
 					groentijd = *p;
+					break;
 				case 'o':
 					oranjetijd = *p;
+					break;
 				case 'r':
 					roodtijd = *p;
+					break;
 				case 'n':
 					nachtstandtijd = *p;
+					break;
+				default:
+					//doe niks
+					break;
 			}
 		}
 	}

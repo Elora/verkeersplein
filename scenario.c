@@ -31,7 +31,7 @@ void Scenario::zetAllesNaarGroen() {
 void Scenario::zetAllesNaarRood() { 
 	
 	//Loopje wordt aantal keer uitgevoerd afhankelijk van de variabele die de variabelebeheerder teruggeeft
-	for(int k=0; k < (variabelebeheerder->krijgVariabele('0') * 2); k++)
+	for(int k=0; k < (variabelebeheerder->krijgVariabele('o') * 2); k++)
 	{	
 		//Hierdoor gaan de voetgangerslichten groen knipperen en blijven de autolichten oranje					
 		for (int c = 1; lichten->geefPositie(c) != 0; c++) 
