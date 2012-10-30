@@ -33,14 +33,7 @@ uint8_t Serial::lees_serial(uint8_t* p)
 	return 0;
 }
 
-//Deze fuctie stuurd gegevens door wanneer er een fout optreed bij het invoeren
-void Serial::stuurErrorCode(int error, int limiet) {
-	schrijf_serial(error);
-	schrijf_serial(limiet);
-}
-
 void Serial::stuurSuccesCode(){
 	schrijf_serial(255);
 }
-
 
