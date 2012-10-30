@@ -38,7 +38,6 @@ void Serial::writeChar(char ch)
 {
 	schrijf_serial(ch);
 
-
 }
 
 void Serial::writeString(char *string)

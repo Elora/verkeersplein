@@ -107,6 +107,8 @@ template <typename T> void List<T>::haalUitLijst(T uit){
                     hulp2 = hulp->next->next;
                     free(hulp->next);
                     hulp->next = hulp2;
+					if (hulp2 == 0)
+						staart = hulp;
                     hulp = staart;
                 }
                 else hulp = hulp->next;
