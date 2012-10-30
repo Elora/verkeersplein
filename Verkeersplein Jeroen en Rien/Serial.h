@@ -7,11 +7,10 @@ class Serial {
 	public:
 		Serial();
 		void init();
-		void writeChar(char);
-		void writeString(char *string);
-		void writeInteger(int16_t, uint8_t);
 		uint8_t lees_serial(uint8_t*);
 		void schrijf_serial(uint8_t d);
+		void stuurErrorCode(int error, int limiet);
+		void stuurSuccesCode();
 
 	private:
 		int baud;

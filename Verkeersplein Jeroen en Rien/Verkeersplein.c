@@ -43,7 +43,7 @@ ISR(TIMER0_OVF_vect) {
 	//Seriele poort wordt uitgelezen
 	variabelebeheerder.leesSerielePoort();
 	//Schakelaar wordt uigelezen om te kunnen schakelen naar de nachtstand
-	variabelebeheerder.zetNacht(start.isGeactiveert());
+	//variabelebeheerder.zetNacht(start.isGeactiveert());
 	
 	//Onderstaande wordt alleen uitgevoerd wanneer het geen nacht is
 	if(variabelebeheerder.krijgNacht() == false) {

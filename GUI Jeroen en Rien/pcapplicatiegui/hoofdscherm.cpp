@@ -73,6 +73,9 @@ void HoofdScherm::zetNachtstandUit() {
     errorCheck();
 }
 
+// errorCheck() begint met het lezen van een karakter
+// Het karakter geeft een bepaalde status weer en de status
+// wordt dan geprint in de text box.
 void HoofdScherm::errorCheck(){
     char buffer[100];
     int limiet;

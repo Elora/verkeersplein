@@ -10,14 +10,17 @@ template <typename T> List<T>::List(){
 }
 
 template<typename T> void List<T>::push_front(T in){
-    if (kop == 0) //Maakt een element aan waar de kop en staart naar wijzen als de lijst leeg is
+    //Maakt een element aan waar de kop en staart naar wijzen als de lijst leeg is
+		if (kop == 0) 
     {
         kop = staart = (struct lijst*) malloc(sizeof(struct lijst));
         kop->next = 0;
         kop->data = in;
     }
-    else //Maakt een element aan aan het begin van de lijst als er al wat in de lijst staat en het element nog niet voorkomt
+    else 
     {
+		//Maakt een element aan aan het begin van de lijst als er al wat in de lijst staat 
+		//en het element nog niet voorkomt
         if (!komtAlVoor(in))
         {
             hulp = (struct lijst*) malloc(sizeof(lijst));
@@ -29,13 +32,16 @@ template<typename T> void List<T>::push_front(T in){
 }
 
 template <typename T> void List<T>::push_back(T in){
-    if (kop == 0) //Maakt een element aan waar de kop en staart naar wijzen als de lijst leeg is
+    //Maakt een element aan waar de kop en staart naar wijzen als de lijst leeg is
+		if (kop == 0) 
     {
         kop = staart = (struct lijst*) malloc(sizeof(lijst));
         kop->next = 0;
         kop->data = in;
     }
-    else //Maakt een element aan aan het einde van de lijst als er al wat in de lijst staat en het element nog niet voorkomt
+    //Maakt een element aan aan het einde van de lijst als er al wat in de lijst staat 
+		//en het element nog niet voorkomt
+		else 
     {
         if (!komtAlVoor(in))
         {
@@ -49,7 +55,8 @@ template <typename T> void List<T>::push_back(T in){
 }
 
 template <typename T> void List<T>::pop_front(){
-if (kop != 0) //Verwijderd de eerste waarde uit de lijst zolang de lijst niet leeg is
+//Verwijderd de eerste waarde uit de lijst zolang de lijst niet leeg is
+if (kop != 0) 
     {
         hulp = kop;
         kop = hulp->next;
@@ -58,7 +65,8 @@ if (kop != 0) //Verwijderd de eerste waarde uit de lijst zolang de lijst niet le
 }
 
 template <typename T> void List<T>::pop_back(){
-if (kop != 0) //Verwijderd de laatse waarde uit de lijst zolang de lijst niet leeg is
+//Verwijderd de laatse waarde uit de lijst zolang de lijst niet leeg is
+if (kop != 0) 
     {
         for (hulp = kop; hulp->next!=staart; hulp=hulp->next){};
         free(hulp->next);
@@ -82,6 +90,7 @@ template <typename T> bool List<T>::komtAlVoor(T in){
 }
 
 template <typename T> T List<T>::krijgKop(){
+//Geeft de kop zolang de lijst gevuld is
     if (kop != 0)
         return kop->data;
     else
@@ -89,9 +98,12 @@ template <typename T> T List<T>::krijgKop(){
 }
 
 template <typename T> void List<T>::haalUitLijst(T uit){
+//Verwijderd de het opgegeven object uit de lijst
 	struct lijst* hulp2;
+	//Kijken of de lijst leeg is
     if (kop != 0)
     {
+			//Kijken of het om de kop gaat
         if (kop->data == uit)
         {
             hulp = kop->next;
@@ -100,15 +112,17 @@ template <typename T> void List<T>::haalUitLijst(T uit){
         }
         else
         {
+					//loop de hele lijst door
             for (hulp = kop; hulp != staart; )
             {
+								//test of het volgende object verwijderd moet worden
                 if (hulp->next->data == uit)
                 {
                     hulp2 = hulp->next->next;
                     free(hulp->next);
                     hulp->next = hulp2;
-					if (hulp2 == 0)
-						staart = hulp;
+										if (hulp2 == 0)
+											staart = hulp;
                     hulp = staart;
                 }
                 else hulp = hulp->next;
@@ -119,10 +133,14 @@ template <typename T> void List<T>::haalUitLijst(T uit){
 
 template <typename T> T List<T>::geefPositie(int positie){
     if (positie < 0) positie = 0;
-    hulp=kop; //Als de lijst leeg is wordt 0 teruggegeven;
+    hulp=kop;
+
+		//Als de lijst leeg is wordt 0 teruggegeven;
     if (hulp == 0)
             return 0;
-
+		
+		//Als de lijst gevuld is wordt de hele lijst doorgelopen totdat het element is gevonden
+		//of totdat de hele lijst is doorgelopen zonder iets te vinden
     for(int i = 1; i < positie; i++)
     {
         hulp = hulp->next;

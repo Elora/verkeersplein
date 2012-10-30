@@ -71,7 +71,8 @@ void Scenario::zetAllesUit() {
 }
 
 void Scenario::zetAllesNaarOranje() {
-	for (int i = 1; lichten->geefPositie(i) != 0; i++) //Alle autolichten naar oranje en voetgangerlichten uit zetten
+	//Alle autolichten naar oranje zetten en voetgangerlichten uit zetten
+	for (int i = 1; lichten->geefPositie(i) != 0; i++) 
 	{
 		lichten->geefPositie(i)->vanGroenNaarRood(0);
 	}

@@ -9,7 +9,7 @@ VerkeersRegelaar::VerkeersRegelaar(List<Scenario*>* s, WachtrijBeheerder* w, Var
 
 void VerkeersRegelaar::doeNachtStand(){ //Deze functie voert de nachtstand uit
 
-	while(variabelebeheerder->krijgNacht() == true) //controleren of het nacht is
+	while(variabelebeheerder->krijgNacht()) //controleren of het nacht is
 	{
 		for (int b = 1; scenariolijst->geefPositie(b) != 0; b++) //Alle scenario's langslopen
 		{
@@ -103,8 +103,10 @@ void VerkeersRegelaar::doeWachtrij() {
 }
 
 void VerkeersRegelaar::kiesFunctie() {
-	if (variabelebeheerder->krijgNacht() == true)
+  //Test of het nacht is
+	if (variabelebeheerder->krijgNacht())
 		doeNachtStand();
+	//Test of de wachtrij gevuld is
 	else if (wachtrijbeheerder->geefEersteInWachtrij() != 0)
 		doeWachtrij();
 	else
