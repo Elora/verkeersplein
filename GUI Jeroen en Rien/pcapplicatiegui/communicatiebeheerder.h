@@ -11,13 +11,13 @@ class CommunicatieBeheerder
     public:
         CommunicatieBeheerder();
         ~CommunicatieBeheerder();
-        int rs232_open(void);
-        int rs232_close(void);
-        int rs232_putchar(char c);
-        int rs232_getchar();
+        int rs232_OpenVerbinding(void);
+        int rs232_VerbreekVerbinding(void);
+        int rs232_SchrijfChar(char c);
+        int rs232_KrijgChar();
 
     private:
-        int rs232_getchar_nb();
+        int rs232_LeesSerial();
         int fd_RS232;
 
 };

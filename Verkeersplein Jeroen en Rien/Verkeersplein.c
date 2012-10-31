@@ -138,7 +138,7 @@ int main()
 	s.push_back(&s2);
 	s.push_back(&s3);
 
-	variabelebeheerder.setAantalScenarios(3);
+	variabelebeheerder.zetAantalScenarios(3);
 
 	//Scenario's toekennen aan sensoren
 	svz.kenScenarioToe(&s3);

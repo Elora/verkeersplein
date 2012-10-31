@@ -8,14 +8,14 @@
 
 
 CommunicatieBeheerder::CommunicatieBeheerder() {
-    rs232_open();
+    rs232_OpenVerbinding();
 }
 
 CommunicatieBeheerder::~CommunicatieBeheerder() {
-    rs232_close();
+    rs232_VerbreekVerbinding();
 }
 
-int CommunicatieBeheerder::rs232_open(void) {
+int CommunicatieBeheerder::rs232_OpenVerbinding(void) {
     char 		*name;
     int 		result;
     struct termios	tty;
@@ -52,14 +52,14 @@ int CommunicatieBeheerder::rs232_open(void) {
     tcflush(fd_RS232, TCIOFLUSH); // flush I/O buffer
 }
 
-int CommunicatieBeheerder::rs232_close() {
+int CommunicatieBeheerder::rs232_VerbreekVerbinding() {
     int result;
 
     result = close(fd_RS232);
     assert (result==0);
 }
 
-int CommunicatieBeheerder::rs232_putchar(char c) {
+int CommunicatieBeheerder::rs232_SchrijfChar(char c) {
     int result;
 
     do {
@@ -70,7 +70,7 @@ int CommunicatieBeheerder::rs232_putchar(char c) {
     return result;
 }
 
-int CommunicatieBeheerder::rs232_getchar_nb()
+int CommunicatieBeheerder::rs232_LeesSerial()
 {
         int 		result;
         unsigned char 	c;
@@ -85,11 +85,11 @@ int CommunicatieBeheerder::rs232_getchar_nb()
         }
 }
 
-int CommunicatieBeheerder::rs232_getchar()
+int CommunicatieBeheerder::rs232_KrijgChar()
 {
     int c;
 
-    while ((c = rs232_getchar_nb()) == -1)
+    while ((c = rs232_LeesSerial()) == -1)
             ;
     return c;
 }

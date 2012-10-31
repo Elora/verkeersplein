@@ -29,8 +29,8 @@ void HoofdScherm::zetGroenTijd() {
     int waarde;
     char letter = 'g';
     waarde = ui->spinBox->value();
-    communicatiebeheerder->rs232_putchar(letter);
-    communicatiebeheerder->rs232_putchar(waarde);
+    communicatiebeheerder->rs232_SchrijfChar(letter);
+    communicatiebeheerder->rs232_SchrijfChar(waarde);
     errorCheck();
 }
 
@@ -38,8 +38,8 @@ void HoofdScherm::zetRoodTijd() {
     int waarde;
     char letter = 'r';
     waarde = ui->spinBox->value();
-    communicatiebeheerder->rs232_putchar(letter);
-    communicatiebeheerder->rs232_putchar(waarde);
+    communicatiebeheerder->rs232_SchrijfChar(letter);
+    communicatiebeheerder->rs232_SchrijfChar(waarde);
     errorCheck();
 }
 
@@ -47,8 +47,8 @@ void HoofdScherm::zetOranjeTijd() {
     int waarde;
     char letter = 'o';
     waarde = ui->spinBox->value();
-    communicatiebeheerder->rs232_putchar(letter);
-    communicatiebeheerder->rs232_putchar(waarde);
+    communicatiebeheerder->rs232_SchrijfChar(letter);
+    communicatiebeheerder->rs232_SchrijfChar(waarde);
     errorCheck();
 }
 
@@ -56,20 +56,20 @@ void HoofdScherm::zetKnipperTijd() {
     int waarde;
     char letter = 'n';
     waarde = ui->spinBox->value();
-    communicatiebeheerder->rs232_putchar(letter);
-    communicatiebeheerder->rs232_putchar(waarde);
+    communicatiebeheerder->rs232_SchrijfChar(letter);
+    communicatiebeheerder->rs232_SchrijfChar(waarde);
     errorCheck();
 }
 
 void HoofdScherm::zetNachtstandAan() {
     char letter = 'a';
-    communicatiebeheerder->rs232_putchar(letter);
+    communicatiebeheerder->rs232_SchrijfChar(letter);
     errorCheck();
 }
 
 void HoofdScherm::zetNachtstandUit() {
     char letter = 'u';
-    communicatiebeheerder->rs232_putchar(letter);
+    communicatiebeheerder->rs232_SchrijfChar(letter);
     errorCheck();
 }
 
@@ -79,41 +79,41 @@ void HoofdScherm::zetNachtstandUit() {
 void HoofdScherm::errorCheck(){
     char buffer[100];
     int limiet;
-    int errorCode = communicatiebeheerder->rs232_getchar();
+    int errorCode = communicatiebeheerder->rs232_KrijgChar();
     cout<<"errocode: " << errorCode << endl;
     switch(errorCode) {
         case 1:
-            limiet = communicatiebeheerder->rs232_getchar();
+            limiet = communicatiebeheerder->rs232_KrijgChar();
             sprintf(buffer, "Groen tijd te laag, minimale waarde: %d", limiet);
             ui->infoLog->append(buffer);
             break;
         case 2:
-            limiet = communicatiebeheerder->rs232_getchar();
+            limiet = communicatiebeheerder->rs232_KrijgChar();
             sprintf(buffer, "Groen tijd te hoog, maximale waarde: %d", limiet);
             ui->infoLog->append(buffer);
             break;
         case 3:
-            limiet = communicatiebeheerder->rs232_getchar();
+            limiet = communicatiebeheerder->rs232_KrijgChar();
             sprintf(buffer, "Oranje tijd te laag, minimale waarde: %d", limiet);
             ui->infoLog->append(buffer);
             break;
         case 4:
-            limiet = communicatiebeheerder->rs232_getchar();
+            limiet = communicatiebeheerder->rs232_KrijgChar();
             sprintf(buffer, "Oranje tijd te hoog, maximale waarde: %d", limiet);
             ui->infoLog->append(buffer);
             break;
         case 5:
-            limiet = communicatiebeheerder->rs232_getchar();
+            limiet = communicatiebeheerder->rs232_KrijgChar();
             sprintf(buffer, "Rood tijd te laag, minimale waarde: %d", limiet);
             ui->infoLog->append(buffer);
             break;
         case 6:
-            limiet = communicatiebeheerder->rs232_getchar();
+            limiet = communicatiebeheerder->rs232_KrijgChar();
             sprintf(buffer, "Rood tijd te hoog, maximale waarde: %d", limiet);
             ui->infoLog->append(buffer);
             break;
         case 7:
-            limiet = communicatiebeheerder->rs232_getchar();
+            limiet = communicatiebeheerder->rs232_KrijgChar();
             sprintf(buffer, "Knipper tijd te hoog, maximale waarde: %d", limiet);
             ui->infoLog->append(buffer);
             break;
