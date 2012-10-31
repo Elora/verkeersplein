@@ -78,43 +78,43 @@ void HoofdScherm::zetNachtstandUit() {
 // wordt dan geprint in de text box.
 void HoofdScherm::errorCheck(){
     char buffer[100];
-    int limiet;
+    int tijd;
     int errorCode = communicatiebeheerder->rs232_KrijgChar();
     cout<<"errocode: " << errorCode << endl;
     switch(errorCode) {
         case 1:
-            limiet = communicatiebeheerder->rs232_KrijgChar();
-            sprintf(buffer, "Groen tijd te laag, minimale waarde: %d", limiet);
+            tijd = communicatiebeheerder->rs232_KrijgChar();
+            sprintf(buffer, "Groen tijd te laag, minimale waarde: %d", tijd);
             ui->infoLog->append(buffer);
             break;
         case 2:
-            limiet = communicatiebeheerder->rs232_KrijgChar();
-            sprintf(buffer, "Groen tijd te hoog, maximale waarde: %d", limiet);
+            tijd = communicatiebeheerder->rs232_KrijgChar();
+            sprintf(buffer, "Groen tijd te hoog, maximale waarde: %d", tijd);
             ui->infoLog->append(buffer);
             break;
         case 3:
-            limiet = communicatiebeheerder->rs232_KrijgChar();
-            sprintf(buffer, "Oranje tijd te laag, minimale waarde: %d", limiet);
+            tijd = communicatiebeheerder->rs232_KrijgChar();
+            sprintf(buffer, "Oranje tijd te laag, minimale waarde: %d", tijd);
             ui->infoLog->append(buffer);
             break;
         case 4:
-            limiet = communicatiebeheerder->rs232_KrijgChar();
-            sprintf(buffer, "Oranje tijd te hoog, maximale waarde: %d", limiet);
+            tijd = communicatiebeheerder->rs232_KrijgChar();
+            sprintf(buffer, "Oranje tijd te hoog, maximale waarde: %d", tijd);
             ui->infoLog->append(buffer);
             break;
         case 5:
-            limiet = communicatiebeheerder->rs232_KrijgChar();
-            sprintf(buffer, "Rood tijd te laag, minimale waarde: %d", limiet);
+            tijd = communicatiebeheerder->rs232_KrijgChar();
+            sprintf(buffer, "Rood tijd te laag, minimale waarde: %d", tijd);
             ui->infoLog->append(buffer);
             break;
         case 6:
-            limiet = communicatiebeheerder->rs232_KrijgChar();
-            sprintf(buffer, "Rood tijd te hoog, maximale waarde: %d", limiet);
+            tijd = communicatiebeheerder->rs232_KrijgChar();
+            sprintf(buffer, "Rood tijd te hoog, maximale waarde: %d", tijd);
             ui->infoLog->append(buffer);
             break;
         case 7:
-            limiet = communicatiebeheerder->rs232_KrijgChar();
-            sprintf(buffer, "Knipper tijd te hoog, maximale waarde: %d", limiet);
+            tijd = communicatiebeheerder->rs232_KrijgChar();
+            sprintf(buffer, "Knipper tijd te hoog, maximale waarde: %d", tijd);
             ui->infoLog->append(buffer);
             break;
         case 8:
