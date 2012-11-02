@@ -11,7 +11,7 @@ class VariabeleBeheerder {
 		int krijgVariabele(char);
 		void leesSerielePoort(void);
 		void zetAantalScenarios(int i);
-		void stuurErrorCode(int, int);
+
 	private:
 		char type;
 		int groentijd;
