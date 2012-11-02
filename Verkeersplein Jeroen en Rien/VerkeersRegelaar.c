@@ -41,7 +41,7 @@ void VerkeersRegelaar::komtUitNachtStand() { 	//Deze functie wordt aangeroepen b
 	}
 	
 	for (int n = 0; n < variabelebeheerder->krijgVariabele('r'); n++)
-		_delay_ms(1000);		//Vijf seconden wachten 
+		_delay_ms(1000);		//Een bepaalde tijd
 
 	for (int i = 1; scenariolijst->geefPositie(i) != 0; i++) { //Doorloop alle scenario's omstebeurt
 		Scenario* scenario = scenariolijst->geefPositie(i);
@@ -52,7 +52,7 @@ void VerkeersRegelaar::komtUitNachtStand() { 	//Deze functie wordt aangeroepen b
 		wachtrijbeheerder->haalUitWachtrij(scenario);
 
 		for (int n = 0; n < variabelebeheerder->krijgVariabele('r'); n++)
-			_delay_ms(1000);			//En 5 sec wachten voordat het volgende scenario op groen gaat
+			_delay_ms(1000);			//Een bepaalde tijd wachten voordat het volgende scenario op groen gaat
 	}											
 }
 
@@ -67,7 +67,7 @@ void VerkeersRegelaar::doeStandaardSequentie() { //Deze functie voert de standaa
 		scenario->zetAllesNaarRood();	//En alles weer naar rood laten gaan
 		
 		for (int n = 0; n < variabelebeheerder->krijgVariabele('r'); n++)
-			_delay_ms(1000);			//En 5 sec wachten voordat het volgende scenario op groen gaat
+			_delay_ms(1000);			//Een bepaalde tijd wachten voordat het volgende scenario op groen gaat
 
 		int j = i + 1;	
 		if(scenariolijst->geefPositie(j) == 0)	//Checken of de volgende positie in scenariolijst een scenario bevat
@@ -94,7 +94,7 @@ void VerkeersRegelaar::doeWachtrij() {
 		wachtrijbeheerder->haalEersteUitWachtrij(); //Het eerste scenario uit de wachtrij halen
 		
 		for (int n = 0; n < variabelebeheerder->krijgVariabele('r'); n++)
-			_delay_ms(1000);			//En 5 sec wachten voordat het volgende scenario op groen gaat
+			_delay_ms(1000);			//Een bepaalde tijd wachten voordat het volgende scenario op groen gaat
 		
 		if(variabelebeheerder->krijgNacht() == true) //Checken of het onderhand nacht is, zo ja dan moet er uit de functie worden gesprongen
 			return;
