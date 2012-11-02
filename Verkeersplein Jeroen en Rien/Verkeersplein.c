@@ -148,9 +148,6 @@ int main()
 	
 	sei(); //Zet interrupts aan
 
-	//Voordat de kiesFunctie() van start gaat wordt gekeken of de nachtschakelaar aan of uit staat
-	variabelebeheerder.zetNacht(start.isGeactiveert());
-
 	while(1) {
 		vr.kiesFunctie();
 	}
