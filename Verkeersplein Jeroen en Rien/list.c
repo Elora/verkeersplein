@@ -9,7 +9,7 @@ template <typename T> List<T>::List(){
     staart = 0;
 }
 
-template<typename T> void List<T>::push_front(T in){
+/*template<typename T> void List<T>::push_front(T in){
     //Maakt een element aan waar de kop en staart naar wijzen als de lijst leeg is
 		if (kop == 0) 
     {
@@ -29,7 +29,7 @@ template<typename T> void List<T>::push_front(T in){
             kop->data = in;
         }
     }
-}
+}*/
 
 template <typename T> void List<T>::push_back(T in){
     //Maakt een element aan waar de kop en staart naar wijzen als de lijst leeg is
@@ -64,7 +64,7 @@ if (kop != 0)
     }
 }
 
-template <typename T> void List<T>::pop_back(){
+/*template <typename T> void List<T>::pop_back(){
 //Verwijderd de laatse waarde uit de lijst zolang de lijst niet leeg is
 if (kop != 0) 
     {
@@ -73,11 +73,11 @@ if (kop != 0)
         staart = hulp;
 		staart->next = 0;
     }
-}
+}*/
 
-template <typename T> void List<T>::leegLijst(){
+/*template <typename T> void List<T>::leegLijst(){
 	while(kop!=0) pop_front();
-}
+}*/
 
 template <typename T> bool List<T>::komtAlVoor(T in){
 // Kijkt of de waarde al in de lijst voorkomt

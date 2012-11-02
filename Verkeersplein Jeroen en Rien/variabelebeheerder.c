@@ -2,13 +2,13 @@
 #include "Serial.h"
 
 //De maxima en minima voor de veschillende lichtkeluren in seconden
-#define maxtijd  60 //De maximale tijd dat auto's mogen wachten bij het stoplicht
-#define mingroentijd  5
-#define maxgroentijd  30
-#define minoranjetijd  2
-#define maxoranjetijd  4
-#define minroodtijd  5
-#define maxknippertijd  3 //De maximale tijd dat het oranje licht aan en uit staat in de nachtstand
+#define MAXTIJD  60 //De maximale tijd dat auto's mogen wachten bij het stoplicht
+#define MINGROENTIJD  5
+#define MAXGROENTIJD  30
+#define MINORANJETIJD  2
+#define MAXORANJETIJD  4
+#define MINROODTIJD  5
+#define MAXKNIPPERTIJD  3 //De maximale tijd dat het oranje licht aan en uit staat in de nachtstand
 
 VariabeleBeheerder::VariabeleBeheerder(Serial* s) : serial(s), nacht(false), groentijd(10), oranjetijd(3), roodtijd(5), nachtstandtijd(1), type('o') {
 }
@@ -49,7 +49,7 @@ int VariabeleBeheerder::krijgVariabele(char v) {
 	}
 }
 
-void VariabeleBeheerder::setAantalScenarios(int i) {
+void VariabeleBeheerder::zetAantalScenarios(int i) {
 	aantalScenarios = i;
 }
 
@@ -73,18 +73,18 @@ void VariabeleBeheerder::leesSerielePoort(void) {
 
 				case 'g':
 					//Testen of ingevoerde tijd kleiner is dat de minimale groentijd
-					if (*p < mingroentijd) {
-						stuurErrorCode(1, mingroentijd);
+					if (*p < MINGROENTIJD) {
+						serial->stuurErrorCode(1, MINGROENTIJD);
 					} 
 					//Testen of ingevoerde tijd groter is dat de maximale groentijd of de totale 
 					//tijd groter wordt dan de maximale wachttijd
-					else if ((*p + roodtijd + oranjetijd)*(aantalScenarios - 1)+roodtijd > maxtijd || *p > maxgroentijd) {
-						berekening = (maxtijd - roodtijd)/(aantalScenarios - 1) - roodtijd - oranjetijd;
+					else if ((*p + roodtijd + oranjetijd)*(aantalScenarios - 1)+roodtijd > MAXTIJD || *p > MAXGROENTIJD) {
+						berekening = (MAXTIJD - roodtijd)/(aantalScenarios - 1) - roodtijd - oranjetijd;
 						//Het kan zijn dat de maximale groentijd uit de berekening groter is dan de 
 						//maximale groentijd die is gedefinieerd.
-						if (berekening > maxgroentijd)
-							berekening = maxgroentijd;
-						stuurErrorCode(2, berekening);
+						if (berekening > MAXGROENTIJD)
+							berekening = MAXGROENTIJD;
+						serial->stuurErrorCode(2, berekening);
 					}
 					//De ingevoerde tijd is toegestaan
 					else {
@@ -95,17 +95,17 @@ void VariabeleBeheerder::leesSerielePoort(void) {
 
 				case 'o':
 					//Testen of ingevoerde tijd kleiner is dat de minimale oranjetijd
-					if (*p < minoranjetijd) {
-						stuurErrorCode(3, minoranjetijd);
+					if (*p < MINORANJETIJD) {
+						serial->stuurErrorCode(3, MINORANJETIJD);
 					//Testen of ingevoerde tijd groter is dat de maximale oranjetijd of de totale 
 					//tijd groter wordt dan de maximale wachttijd
-					} else if ((*p + roodtijd + groentijd)*(aantalScenarios - 1)+roodtijd > maxtijd || *p > maxoranjetijd) {
-						berekening = (maxtijd - roodtijd)/(aantalScenarios - 1) - roodtijd - groentijd;
+					} else if ((*p + roodtijd + groentijd)*(aantalScenarios - 1)+roodtijd > MAXTIJD || *p > MAXORANJETIJD) {
+						berekening = (MAXTIJD - roodtijd)/(aantalScenarios - 1) - roodtijd - groentijd;
 						//Het kan zijn dat de maximale oranjetijd uit de berekening groter is dan de 
 						//maximale oranjetijd die is gedefinieerd.
-						if (berekening > maxoranjetijd)
-							berekening = maxoranjetijd;
-						stuurErrorCode(4, berekening);	
+						if (berekening > MAXORANJETIJD)
+							berekening = MAXORANJETIJD;
+							serial->stuurErrorCode(4, berekening);	
 					}
 					//De ingevoerde tijd is toegestaan
 					else {
@@ -116,13 +116,13 @@ void VariabeleBeheerder::leesSerielePoort(void) {
 
 				case 'r':
 				//Testen of ingevoerde tijd kleiner is dat de minimale roodtijd
-					if (*p < minroodtijd) {
-						stuurErrorCode(5, minroodtijd);
+					if (*p < MINROODTIJD) {
+						serial->stuurErrorCode(5, MINROODTIJD);
 					//Testen of ingevoerde tijd groter is dat de maximale roodtijd of de totale 
 					//tijd groter wordt dan de maximale wachttijd
-					} else if ((*p + oranjetijd + groentijd)*(aantalScenarios - 1)+*p > maxtijd) {
-						berekening = (maxtijd - groentijd*(aantalScenarios - 1) - oranjetijd*(aantalScenarios - 1))/3;
-						stuurErrorCode(6, berekening);
+					} else if ((*p + oranjetijd + groentijd)*(aantalScenarios - 1)+*p > MAXTIJD) {
+						berekening = (MAXTIJD - groentijd*(aantalScenarios - 1) - oranjetijd*(aantalScenarios - 1))/3;
+						serial->stuurErrorCode(6, berekening);
 					}
 					//De ingevoerde tijd is toegestaan
 					else {
@@ -132,8 +132,8 @@ void VariabeleBeheerder::leesSerielePoort(void) {
 					break;
 				case 'n':
 					//Testen of ingevoerde tijd groter is dat de maximale knippertijd
-					if (*p > maxknippertijd) {
-						stuurErrorCode(7, maxknippertijd);
+					if (*p > MAXKNIPPERTIJD) {
+						serial->stuurErrorCode(7, MAXKNIPPERTIJD);
 					}
 					//De ingevoerde tijd is toegestaan
 					else {
@@ -148,9 +148,4 @@ void VariabeleBeheerder::leesSerielePoort(void) {
 			}
 		}
 	}
-}
-
-void VariabeleBeheerder::stuurErrorCode(int error, int limiet) {
-	serial->schrijf_serial(error);
-	serial->schrijf_serial(limiet);
 }

@@ -14,7 +14,6 @@ public:
     bool komtAlVoor(T);
     T krijgKop();
     T geefPositie(int);
-	int krijgGrootte();
 
 private:
     struct lijst{

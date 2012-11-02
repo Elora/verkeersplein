@@ -10,7 +10,7 @@ class VariabeleBeheerder {
 		bool krijgNacht(void);	//Vraag op of de variabele nacht true of false is
 		int krijgVariabele(char);
 		void leesSerielePoort(void);
-		void setAantalScenarios(int i);
+		void zetAantalScenarios(int i);
 		void stuurErrorCode(int, int);
 	private:
 		char type;

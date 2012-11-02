@@ -10,6 +10,7 @@ class Serial {
 		uint8_t lees_serial(uint8_t*);
 		void schrijf_serial(uint8_t d);
 		void stuurSuccesCode();
+		void stuurErrorCode(int, int);
 
 	private:
 		int baud;

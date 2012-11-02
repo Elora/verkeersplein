@@ -37,3 +37,7 @@ void Serial::stuurSuccesCode(){
 	schrijf_serial(255);
 }
 
+void Serial::stuurErrorCode(int error, int waarde) {
+	schrijf_serial(error);
+	schrijf_serial(waarde);
+}

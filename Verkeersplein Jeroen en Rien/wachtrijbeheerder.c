@@ -21,10 +21,6 @@ void WachtrijBeheerder::haalUitWachtrij(Scenario *s){
 	wachtrij->haalUitLijst(s);
 }
 
-void WachtrijBeheerder::leegWachtrij(){
-	wachtrij->leegLijst();
-}
-
 Scenario* WachtrijBeheerder::geefEersteInWachtrij(){
 	return wachtrij->krijgKop();
 }

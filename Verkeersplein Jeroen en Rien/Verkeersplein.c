@@ -42,8 +42,6 @@ VariabeleBeheerder variabelebeheerder(&serial);
 ISR(TIMER0_OVF_vect) {
 	//Seriele poort wordt uitgelezen
 	variabelebeheerder.leesSerielePoort();
-	//Schakelaar wordt uigelezen om te kunnen schakelen naar de nachtstand
-	//variabelebeheerder.zetNacht(start.isGeactiveert());
 	
 	//Onderstaande wordt alleen uitgevoerd wanneer het geen nacht is
 	if(variabelebeheerder.krijgNacht() == false) {
@@ -100,9 +98,6 @@ int main()
 
 	serial.init();
 
-	//while(1)
-	//	serial.schrijf_serial('Z');
-
 	// Aanmaken van de verschillende autolichtobjecten
 	AutoLicht azl(0xFE, 0xFD, 0xFB, ADRESPORTB);
 	AutoLicht azr(0xF7, 0xEF, 0xDF, ADRESPORTB);
@@ -138,7 +133,7 @@ int main()
 	s.push_back(&s2);
 	s.push_back(&s3);
 
-	variabelebeheerder.setAantalScenarios(3);
+	variabelebeheerder.zetAantalScenarios(3);
 
 	//Scenario's toekennen aan sensoren
 	svz.kenScenarioToe(&s3);
